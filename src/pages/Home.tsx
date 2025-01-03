@@ -1,9 +1,8 @@
-import { lazy, Suspense } from 'react'
-import { Helmet } from 'react-helmet'
-import Preloader from '../components/common/Preloader'
+import { lazy, Suspense } from "react";
+import { Helmet } from "react-helmet";
+import Preloader from "../components/common/Preloader";
 
-const Navbar = lazy(() => import('../components/layout/Navbar'))
-
+const Navbar = lazy(() => import("../components/layout/Navbar"));
 
 export default function HomePage() {
   return (
@@ -16,9 +15,11 @@ export default function HomePage() {
         />
       </Helmet>
       <Suspense fallback={<Preloader />}>
-        <Navbar />
-        <div>Hello World</div>
+        <div className="bg-overlay">
+          <Navbar />
+          <div className="bold">Hello World</div>
+        </div>
       </Suspense>
     </>
-  )
+  );
 }
