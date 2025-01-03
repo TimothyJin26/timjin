@@ -1,0 +1,3 @@
+.preloader > svg {
+    stroke: theme(colors.fuchsia.700);
+  }
