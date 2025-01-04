@@ -9,7 +9,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -73,10 +72,4 @@ button:focus-visible {
 
 .preloader > svg {
   stroke: theme(colors.fuchsia.700);
-}
-
-.bg-overlay {
-  background: linear-gradient(30deg, #c5d1ffe6 33%, #c5d1ff00 66%),
-    linear-gradient(-135deg, #c4bdff 10%, #c6c9ff 50%, #e2f5ff 100%);
-  background-attachment: fixed;
 }

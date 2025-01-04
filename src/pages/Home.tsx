@@ -17,7 +17,7 @@ export default function HomePage() {
       <Suspense fallback={<Preloader />}>
         <div className="bg-overlay">
           <Navbar />
-          <div className="bold">Hello World</div>
+          <div className="bold underline text-lime-50">Hello World</div>
         </div>
       </Suspense>
     </>
