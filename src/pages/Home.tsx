@@ -15,7 +15,7 @@ export default function HomePage() {
         />
       </Helmet>
       <Suspense fallback={<Preloader />}>
-        <div className="bg-overlay">
+        <div>
           <Navbar />
           <div className="bold underline text-lime-50">Hello World</div>
         </div>
