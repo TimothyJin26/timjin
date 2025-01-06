@@ -4,7 +4,7 @@ import Preloader from "../components/common/Preloader";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 
-export default function HomePage() {
+export default function GalleryPage() {
   return (
     <>
       <Helmet>
@@ -17,7 +17,7 @@ export default function HomePage() {
       <Suspense fallback={<Preloader />}>
         <div>
           <Navbar />
-          <div className="bold underline text-3xl text-black">Hello World</div>
+          <div className="bold underline text-3xl text-black">Gallery Page</div>
         </div>
       </Suspense>
     </>
