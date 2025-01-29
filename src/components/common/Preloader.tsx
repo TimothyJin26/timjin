@@ -1,9 +1,16 @@
-import { MutatingDots } from 'react-loader-spinner'
+import { ClimbingBoxLoader } from "react-spinners";
 
 export default function Preloader() {
-  return (
-    <div className='flex h-screen items-center justify-center'>
-      <MutatingDots wrapperClass='preloader' />
-    </div>
-  )
+    return (
+        <>
+            <div className="flex items-center justify-center w-screen h-screen">
+                <ClimbingBoxLoader
+                    color={"#243540"}
+                    size={20}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
+        </>
+    );
 }
