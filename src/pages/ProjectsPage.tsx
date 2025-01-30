@@ -4,11 +4,11 @@ import Preloader from "../components/common/Preloader";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 
-export default function AboutPage() {
+export default function ProjectsPage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin</title>
+                <title>Tim Jin | Projects</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"
@@ -18,7 +18,7 @@ export default function AboutPage() {
                 <div>
                     <Navbar />
                     <div className="bold underline text-3xl text-black">
-                        About Page
+                        Projects Page
                     </div>
                 </div>
             </Suspense>

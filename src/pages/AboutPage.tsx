@@ -1,14 +1,15 @@
 import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import Preloader from "../components/common/Preloader";
+import About from "../components/About";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 
-export default function ProjectsPage() {
+export default function AboutPage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin</title>
+                <title>Tim Jin | About</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"
@@ -17,9 +18,7 @@ export default function ProjectsPage() {
             <Suspense fallback={<Preloader />}>
                 <div>
                     <Navbar />
-                    <div className="bold underline text-3xl text-black">
-                        Projects Page
-                    </div>
+                    <About />
                 </div>
             </Suspense>
         </>

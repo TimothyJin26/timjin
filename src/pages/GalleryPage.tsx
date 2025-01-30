@@ -8,7 +8,7 @@ export default function GalleryPage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin</title>
+                <title>Tim Jin | Gallery</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"
