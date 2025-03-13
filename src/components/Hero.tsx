@@ -24,7 +24,7 @@ export default function Hero() {
                                 1500,
                             ]}
                             wrapper="span"
-                            speed={1}
+                            speed={2}
                             style={{
                                 fontSize: "1.5em",
                                 display: "inline-block",
