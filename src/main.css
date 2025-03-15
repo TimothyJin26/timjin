@@ -46,3 +46,7 @@ h1 {
 pre {
     font-family: inherit; /* Inherit font from parent */
 }
+
+br {
+    font-family: inherit; /* Inherit font from parent */
+}
