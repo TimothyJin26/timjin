@@ -2,14 +2,14 @@ export default function Hero() {
     return (
         <>
             <div className="h-screen flex flex-col justify-center items-center">
-                <div className="w-5/6 ml-60">
-                    <div className="text-6xl font-bold text-[#301000] pb-3">
+                <div className="w-5/6 ml-32">
+                    <div className="text-5xl font-bold text-[#301000] pb-3">
                         Glad you stopped by!
                     </div>
                     <div className="text-3xl font-semibold text-[#633f3d] pb-16">
                         Here's a little about me
                     </div>
-                    <div className="font-inria text-xl text-black leading-8">
+                    <div className="font-inria text-base text-black leading-8">
                         <div className="pb-8">
                             I'm Tim, a third year Computer Science student at
                             the University of British Columbia. I'm passionate

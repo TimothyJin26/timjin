@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import Preloader from "../components/common/Preloader";
 import About from "../components/About";
+import Experience from "../components/Experience";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 
@@ -19,6 +20,7 @@ export default function AboutPage() {
                 <div>
                     <Navbar />
                     <About />
+                    <Experience />
                 </div>
             </Suspense>
         </>

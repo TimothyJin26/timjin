@@ -16,8 +16,8 @@ export default function Socials() {
                     <ReactSVG
                         src={mail}
                         style={{
-                            width: "32px",
-                            height: "32px",
+                            width: "30px",
+                            height: "30px",
                         }}
                     />
                 </a>
@@ -33,8 +33,8 @@ export default function Socials() {
                     <ReactSVG
                         src={linkedin}
                         style={{
-                            width: "28px",
-                            height: "28px",
+                            width: "26px",
+                            height: "26px",
                         }}
                     />
                 </a>
@@ -50,8 +50,8 @@ export default function Socials() {
                     <ReactSVG
                         src={github}
                         style={{
-                            width: "28px",
-                            height: "28px",
+                            width: "26px",
+                            height: "26px",
                         }}
                     />
                 </a>
