@@ -1,35 +1,35 @@
 export default function Gallery() {
     const images = [
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 1,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 1,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 2,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 2,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 1,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 1,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 2,
         },
         {
-            src: "src/assets/images/IMG_9598.jpg",
+            src: "/assets/images/IMG_9598.jpg",
             span: 1,
         },
     ];
