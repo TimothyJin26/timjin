@@ -32,6 +32,7 @@ const Image: React.FC<ImageProps> = ({
                     src={src}
                     alt={alt}
                     className="w-full h-auto transition-opacity duration-300 group-hover:opacity-10"
+                    loading="lazy"
                 />
                 {/* Overlay */}
                 <div className="absolute inset-0 w-full h-full pt-12 pl-6 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
