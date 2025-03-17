@@ -17,8 +17,8 @@ This project is still under development!
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/timjin/timjin.com
-    cd timjin.com
+    git clone https://github.com/TimothyJin26/timjin.git
+    cd timjin
     ```
 
 2. Install dependencies:
