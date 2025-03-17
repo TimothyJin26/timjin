@@ -41,6 +41,18 @@ const Gallery: React.FC = () => {
             iso: "800",
         },
         {
+            src: "/assets/images/Bee.jpg",
+            span: 1,
+            title: "Arizona\nCactus Garden",
+            date: "19/05/2024",
+            coordinates: "37.435892, -122.171099",
+            camera: "Canon EOS Rebel T7i",
+            lens: "EF-S18-55mm ƒ4-5.6 IS STM",
+            shutter: "1/640",
+            aperture: "5.6",
+            iso: "100",
+        },
+        {
             src: "/assets/images/Mouse_Tank_Rd.jpg",
             span: 1,
             title: "Valley of Fire\nState Park",

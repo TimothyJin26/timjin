@@ -6,7 +6,7 @@ export default {
             fontFamily: {
                 inter: ["Inter", "sans-serif"],
                 inria: ["Inria Serif", "serif"],
-                lekton: ["Lekton", "sans-seif"],
+                lekton: ["Lekton", "sans-serif"],
             },
         },
     },

@@ -12,10 +12,10 @@ export default function Timeline() {
             <div
                 className="absolute left-1/2 border-l-4 border-[#301000] rounded-full transform -translate-x-1/2"
                 style={{
-                    top: "-2rem", // Overflows a little at the top
+                    top: "-1.5rem", // Overflows a little at the top
                     height: `calc(${
                         (timelinePoints.length - 1) * 6
-                    }rem - 2rem)`, // Adjusts height of the timeline line
+                    }rem - 1rem)`, // Adjusts height of the timeline line
                 }}
             ></div>
 
@@ -29,7 +29,7 @@ export default function Timeline() {
                     }}
                 >
                     {/* Word on the Left, aligned to the right */}
-                    <div className="text-base font-inria font-semibold cursor-pointer mr-6 w-full">
+                    <div className="text-lg font-inria font-semibold cursor-pointer mr-6 w-full">
                         {point.label}
                     </div>
 
