@@ -44,7 +44,7 @@ const Gallery: React.FC = () => {
             src: "/assets/images/Bee.jpg",
             span: 1,
             title: "Arizona\nCactus Garden",
-            date: "19/05/2024",
+            date: "18/06/2024",
             coordinates: "37.435892, -122.171099",
             camera: "Canon EOS Rebel T7i",
             lens: "EF-S18-55mm ƒ4-5.6 IS STM",
