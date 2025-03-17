@@ -6,6 +6,12 @@ interface GalleryImage {
     span: number;
     title: string;
     date: string;
+    coordinates?: string;
+    camera?: string;
+    lens?: string;
+    shutter?: string;
+    aperture?: string;
+    iso?: string;
 }
 
 const Gallery: React.FC = () => {
@@ -13,8 +19,14 @@ const Gallery: React.FC = () => {
         {
             src: "/assets/images/Golden_Gate.jpg",
             span: 1,
-            title: "Golden Gate",
+            title: "Golden Gate\nOverlook",
             date: "18/06/2024",
+            coordinates: "37.804340, -122.476704",
+            camera: "Canon EOS Rebel T7i",
+            lens: "EF-S55-250mm ƒ4-5.6 IS STM",
+            shutter: "1/80",
+            aperture: "6.3",
+            iso: "200",
         },
         {
             src: "/assets/images/Rose_Garden_Drone.jpg",
@@ -25,20 +37,38 @@ const Gallery: React.FC = () => {
         {
             src: "/assets/images/Mouse_Tank_Rd.jpg",
             span: 1,
-            title: "Mouse Tank Rd",
+            title: "Valley of Fire\nState Park",
             date: "19/12/2024",
+            coordinates: "36.449397, -114.515687",
+            camera: "Canon EOS Rebel T7i",
+            lens: "EF-S55-250mm ƒ4-5.6 IS STM",
+            shutter: "1/250",
+            aperture: "7.1",
+            iso: "200",
         },
         {
             src: "/assets/images/Devils_Bunker.jpg",
             span: 1,
             title: "Devil's Bunker",
             date: "14/06/2024",
+            coordinates: "37.570078, -122.516173",
+            camera: "Canon EOS Rebel T7i",
+            lens: "EF-S55-250mm ƒ4-5.6 IS STM",
+            shutter: "1/250",
+            aperture: "10",
+            iso: "100",
         },
         {
             src: "/assets/images/California_St.jpg",
             span: 1,
-            title: "California St",
+            title: "California St &\nStockton St",
             date: "18/06/2024",
+            coordinates: "37.792283, -122.407427",
+            camera: "Canon EOS Rebel T7i",
+            lens: "EF-S55-250mm ƒ4-5.6 IS STM",
+            shutter: "1/250",
+            aperture: "6.3",
+            iso: "100",
         },
         {
             src: "/assets/images/Santa_Monica.jpg",
@@ -69,6 +99,12 @@ const Gallery: React.FC = () => {
                                 alt={`Gallery Image ${index + 1}`}
                                 title={image.title}
                                 date={image.date}
+                                coordinates={image.coordinates}
+                                camera={image.camera}
+                                lens={image.lens}
+                                shutter={image.shutter}
+                                aperture={image.aperture}
+                                iso={image.iso}
                             />
                         ))}
                     </div>

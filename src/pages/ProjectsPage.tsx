@@ -18,7 +18,7 @@ export default function ProjectsPage() {
                 <div>
                     <Navbar />
                     <div className="bold underline text-3xl text-black">
-                        Projects Page 🔧
+                        Projects Page 🔧 (Under Construction)
                     </div>
                 </div>
             </Suspense>
