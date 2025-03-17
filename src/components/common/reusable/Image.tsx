@@ -5,6 +5,7 @@ interface ImageProps {
     date: string;
 }
 
+// @ts-ignore: Unused 'title' prop
 const Image: React.FC<ImageProps> = ({ src, alt, title, date }) => {
     return (
         <div className="mb-4 break-inside-avoid-column">
