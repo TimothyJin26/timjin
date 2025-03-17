@@ -52,7 +52,10 @@ const Image: React.FC<ImageProps> = ({
                         <div className="text-xs font-lekton pt-6">{camera}</div>
                         <div className="text-xs font-lekton pt-1">{lens}</div>
                         <div className="text-xs font-lekton pt-5">
-                            {shutter}s | ƒ{aperture} | ISO {iso}
+                            {shutter}s
+                            <span className="text-[#B8B8B8]"> | </span>ƒ
+                            {aperture}
+                            <span className="text-[#B8B8B8]"> | </span>ISO {iso}
                         </div>
                     </div>
                 </div>
