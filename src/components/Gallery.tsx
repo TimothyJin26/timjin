@@ -17,7 +17,7 @@ interface GalleryImage {
 const Gallery: React.FC = () => {
     const images: GalleryImage[] = [
         {
-            src: "/assets/images/Golden_Gate.jpg",
+            src: "/assets/images/Golden_Gate.webp",
             span: 1,
             title: "Golden Gate\nOverlook",
             date: "18/06/2024",
@@ -29,7 +29,7 @@ const Gallery: React.FC = () => {
             iso: "200",
         },
         {
-            src: "/assets/images/Rose_Garden_Drone.jpg",
+            src: "/assets/images/Rose_Garden_Drone.webp",
             span: 1,
             title: "Rose Garden",
             date: "19/05/2024",
@@ -41,7 +41,7 @@ const Gallery: React.FC = () => {
             iso: "800",
         },
         {
-            src: "/assets/images/Bee.jpg",
+            src: "/assets/images/Bee.webp",
             span: 1,
             title: "Arizona\nCactus Garden",
             date: "18/06/2024",
@@ -53,7 +53,7 @@ const Gallery: React.FC = () => {
             iso: "100",
         },
         {
-            src: "/assets/images/Mouse_Tank_Rd.jpg",
+            src: "/assets/images/Mouse_Tank_Rd.webp",
             span: 1,
             title: "Valley of Fire\nState Park",
             date: "19/12/2024",
@@ -65,7 +65,7 @@ const Gallery: React.FC = () => {
             iso: "200",
         },
         {
-            src: "/assets/images/Joshua_Tree.jpg",
+            src: "/assets/images/Joshua_Tree.webp",
             span: 1,
             title: "Joshua Tree\nNational Park",
             date: "28/04/2024",
@@ -77,7 +77,7 @@ const Gallery: React.FC = () => {
             iso: "200",
         },
         {
-            src: "/assets/images/Devils_Bunker.jpg",
+            src: "/assets/images/Devils_Bunker.webp",
             span: 1,
             title: "Devil's Bunker",
             date: "14/06/2024",
@@ -89,7 +89,7 @@ const Gallery: React.FC = () => {
             iso: "100",
         },
         {
-            src: "/assets/images/Pigeon_Point.jpg",
+            src: "/assets/images/Pigeon_Point.webp",
             span: 1,
             title: "Pigeon Point\nRoad",
             date: "19/06/2024",
@@ -101,7 +101,7 @@ const Gallery: React.FC = () => {
             iso: "100",
         },
         {
-            src: "/assets/images/California_St.jpg",
+            src: "/assets/images/California_St.webp",
             span: 1,
             title: "California St &\nStockton St",
             date: "18/06/2024",
@@ -113,13 +113,13 @@ const Gallery: React.FC = () => {
             iso: "100",
         },
         {
-            src: "/assets/images/Santa_Monica.jpg",
+            src: "/assets/images/Santa_Monica.webp",
             span: 1,
             title: "Santa Monica",
             date: "30/04/2024",
         },
         {
-            src: "/assets/images/Chevy_Bel_Air.jpg",
+            src: "/assets/images/Chevy_Bel_Air.webp",
             span: 1,
             title: "Chevy Bel Air",
             date: "29/04/2024",

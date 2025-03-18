@@ -29,7 +29,7 @@ export default function Timeline() {
                     }}
                 >
                     {/* Word on the Left, aligned to the right */}
-                    <div className="text-lg font-inria font-semibold cursor-pointer mr-6 w-full">
+                    <div className="text-xl font-inria font-medium cursor-pointer mr-6 w-full">
                         {point.label}
                     </div>
 
