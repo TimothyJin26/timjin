@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import Preloader from "../components/common/Preloader";
+import Projects from "../components/Projects";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
 
@@ -17,9 +18,7 @@ export default function ProjectsPage() {
             <Suspense fallback={<Preloader />}>
                 <div>
                     <Navbar />
-                    <div className="bold underline text-3xl text-black">
-                        Projects Page 🔧 (Under Construction)
-                    </div>
+                    <Projects />
                 </div>
             </Suspense>
         </>

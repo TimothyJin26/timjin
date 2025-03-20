@@ -35,6 +35,7 @@ const Image: React.FC<ImageProps> = ({
                     loading="lazy"
                 />
                 {/* Overlay */}
+
                 <div className="absolute inset-0 w-full h-full pt-12 pl-6 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="text-black">
                         <div className="text-2xl font-medium font-inter">
@@ -47,21 +48,29 @@ const Image: React.FC<ImageProps> = ({
                                 </span>
                             ))}
                         </div>
-                        <div className="text-xs font-lekton pt-5">
-                            {coordinates}
-                        </div>
-                        <div className="text-xs font-lekton pt-6">{camera}</div>
-                        <div className="text-xs font-lekton pt-1">{lens}</div>
-                        <div className="text-xs font-lekton pt-5">
-                            {shutter}s
-                            <span className="text-[#B8B8B8]"> | </span>ƒ
-                            {aperture}
-                            <span className="text-[#B8B8B8]"> | </span>ISO {iso}
-                        </div>
+                        {camera !== "?" && (
+                            <div>
+                                <div className="text-xs font-lekton pt-5">
+                                    {coordinates}
+                                </div>
+                                <div className="text-xs font-lekton pt-6">
+                                    {camera}
+                                </div>
+                                <div className="text-xs font-lekton pt-1">
+                                    {lens}
+                                </div>
+                                <div className="text-xs font-lekton pt-5">
+                                    {shutter}s
+                                    <span className="text-[#B8B8B8]"> | </span>ƒ
+                                    {aperture}
+                                    <span className="text-[#B8B8B8]"> | </span>
+                                    ISO {iso}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
-
             <div className="text-xs text-left mt-1 ml-1 font-lekton text-[#B8B8B8]">
                 {date}
             </div>

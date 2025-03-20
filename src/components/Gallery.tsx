@@ -131,7 +131,7 @@ const Gallery: React.FC = () => {
             <div className="h-screen flex">
                 <div>
                     <div className="text-4xl font-bold text-[#301000] pt-32 ml-24">
-                        Gallery 🔧
+                        Gallery
                     </div>
                     <div className="w-5/6 mx-auto columns-4 gap-8 mt-16 pb-16">
                         {images.map((image, index) => (
