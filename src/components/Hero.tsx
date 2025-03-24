@@ -8,7 +8,8 @@ export default function Hero() {
             <div className="h-screen w-screen flex flex-col justify-center items-center">
                 <div className="w-5/6 ml-28">
                     <div className="text-5xl tracking-wide font-bold text-[#301000] pb-3">
-                        <pre>Student, software developer,</pre>
+                        Student, software developer,
+                        <br />
                         ML Researcher
                     </div>
                     <div className="text-[#526370]">

@@ -5,26 +5,31 @@ import { useState, useEffect } from "react";
 export default function LearnMoreHint() {
     const [isVisible, setIsVisible] = useState(false);
     const [fadeIn, setFadeIn] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setIsVisible(true);
-            setTimeout(() => setFadeIn(true), 50);
+            if (!isScrolled) {
+                setIsVisible(true);
+                setTimeout(() => setFadeIn(true), 50);
+            }
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [isScrolled]);
 
     useEffect(() => {
-        if (!isVisible) return;
         const handleScroll = () => {
+            if (!isScrolled) {
+                setIsScrolled(true);
+            }
             setFadeIn(false);
             setTimeout(() => setIsVisible(false), 500);
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [isVisible]);
+    }, [isScrolled]);
 
     if (!isVisible) return null;
 
