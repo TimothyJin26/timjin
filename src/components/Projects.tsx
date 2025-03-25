@@ -6,7 +6,7 @@ const Projects: React.FC = () => {
             <div className="h-screen w-screen flex flex-col justify-center items-center">
                 <div className="w-5/6 ml-28">
                     <div className="text-5xl font-bold text-[#301000] pb-3">
-                        This page is still under construction! 🔧
+                        This page is still under construction 🔧
                     </div>
                     <div className="text-3xl font-semibold text-[#633f3d] pb-16">
                         Please check out my{" "}
@@ -18,7 +18,7 @@ const Projects: React.FC = () => {
                         >
                             GitHub
                         </a>{" "}
-                        in the meantime
+                        in the meantime!
                     </div>
                 </div>
             </div>
