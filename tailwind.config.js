@@ -7,6 +7,16 @@ export default {
                 inter: ["Inter", "sans-serif"],
                 inria: ["Inria Serif", "serif"],
                 lekton: ["Lekton", "sans-serif"],
+                worksans: ["Work Sans", "serif"],
+            },
+            keyframes: {
+                "fade-in": {
+                    "0%": { opacity: 0 },
+                    "100%": { opacity: 1 },
+                },
+            },
+            animation: {
+                "fade-in": "fade-in 0.2s ease-out",
             },
         },
     },

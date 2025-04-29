@@ -9,7 +9,7 @@ export default function Navbar() {
                         timjin
                     </button>
                 </NavLink>
-                <div className="flex font-inria text-base items-center space-x-12 mr-16 font-medium">
+                <div className="flex font-inria text-base items-center space-x-12 mr-16 font-semibold">
                     <NavLink to="/projects">
                         <button className="text-black hover:text-gray-700">
                             Projects
