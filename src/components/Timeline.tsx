@@ -5,7 +5,7 @@ export default function Timeline() {
         {
             id: 1,
             label: "Amazon",
-            role: "Software Developer Intern",
+            role: "Software Development Engineer Intern",
             date: "May 2025 - Present | Vancouver BC",
             details:
                 "Building digital accelration tools for Amazon Entertainment products and services.\n\nMore to come...",
