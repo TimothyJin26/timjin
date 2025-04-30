@@ -88,7 +88,13 @@ export default function Timeline() {
             {/* Details Panel */}
             <div
                 key={selectedPoint.id}
-                className="w-[60%] p-8 bg-[#FFFDFA] border-l-4 border-[#301000] shadow-lg rounded-lg overflow-y-auto key={selectedPoint.id} animate-fade-in"
+                className="w-[60%] py-8 px-12 bg-[#FFFDFA] border-l-4 border-[#301000] rounded-lg overflow-y-auto key={selectedPoint.id} animate-fade-in"
+                style={{
+                    boxShadow: `
+                      0 5px 20px -3px rgba(0, 0, 0, 0.1),
+                      0 2px 8px -4px rgba(0, 0, 0, 0.1)
+                    `
+                }}
             >
                 <h2 className="text-2xl text-[#301000] font-bold mb-1">
                     {selectedPoint.role}
