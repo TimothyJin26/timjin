@@ -2,9 +2,9 @@ import Router from "./router";
 
 const App = () => {
     return (
-        <>
-          <Router />
-        </>
+    <div className="w-full min-h-screen overflow-x-hidden">
+      <Router />
+    </div>
     );
 };
 

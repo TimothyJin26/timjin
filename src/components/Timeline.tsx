@@ -39,7 +39,7 @@ export default function Timeline() {
     const [selectedPoint, setSelectedPoint] = useState(timelinePoints[0]);
 
     return (
-        <div className="flex w-full relative">
+        <div className="flex w-full mx-auto relative">
             {/* Timeline Section */}
             <div className="w-[40%] relative flex items-center">
                 {/* Vertical Line */}
@@ -47,25 +47,36 @@ export default function Timeline() {
 
                 {/* Timeline Points */}
                 <div className="flex flex-col justify-between relative w-full py-8 min-h-[400px]">
-                    {timelinePoints.map((point) => (
-                        <div
-                            key={point.id}
-                            className="flex items-center cursor-pointer w-full"
-                            onClick={() => setSelectedPoint(point)}
-                        >
-                            <div className="text-xl font-medium text-right text-black w-[75.3%] pr-6">
-                                {point.label}
-                            </div>
-                            <div
-                                className={`w-6 h-6 rounded-full ${
-                                    selectedPoint.id === point.id
-                                        ? "bg-[#301000] border-4 border-[#FFFDFA]"
-                                        : "bg-[#FFFDFA] border-4 border-[#301000]"
-                                }`}
-                                style={{ marginLeft: "-12px" }}
-                            ></div>
-                        </div>
-                    ))}
+                {timelinePoints.map((point) => {
+    const isSelected = selectedPoint.id === point.id;
+
+    return (
+        <div
+            key={point.id}
+            className="flex items-center cursor-pointer w-full group"
+            onClick={() => setSelectedPoint(point)}
+        >
+            {/* Label */}
+            <div
+                className={`text-xl font-medium text-right w-[75.3%] pr-6 transition-colors duration-200 ease-in-out
+                    ${isSelected ? "text-[#3b1401]" : "text-black group-hover:text-[#301000]"}`}
+            >
+                {point.label}
+            </div>
+
+            {/* Point */}
+            <div
+                className={`
+                    w-6 h-6 rounded-full transition-all duration-200 ease-in-out
+                    ${isSelected
+                        ? "bg-[#3b1401] border-4 border-[#FFFDFA]"
+                        : "bg-[#FFFDFA] border-4 border-[#301000] group-hover:bg-[#301000] group-hover:border-[#FFFDFA]"}
+                `}
+                style={{ marginLeft: "-12px" }}
+            ></div>
+        </div>
+    );
+})}
                 </div>
             </div>
 

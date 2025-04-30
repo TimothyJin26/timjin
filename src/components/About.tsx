@@ -1,8 +1,8 @@
 export default function About() {
     return (
         <>
-            <div className="h-screen w-screen flex flex-col justify-center items-center">
-                <div className="w-5/6 ml-28">
+            <div className="h-screen w-full flex flex-col justify-center items-center overflow-x-hidden">
+                <div className="w-5/6 pl-28">
                     <div className="text-5xl font-bold text-[#301000] pb-3">
                         Glad you stopped by!
                     </div>
