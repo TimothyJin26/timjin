@@ -47,36 +47,41 @@ export default function Timeline() {
 
                 {/* Timeline Points */}
                 <div className="flex flex-col justify-between relative w-full py-8 min-h-[400px]">
-                {timelinePoints.map((point) => {
-    const isSelected = selectedPoint.id === point.id;
+                    {timelinePoints.map((point) => {
+                        const isSelected = selectedPoint.id === point.id;
+                        return (
+                            <div
+                                key={point.id}
+                                className="flex items-center cursor-pointer w-full group"
+                                onClick={() => setSelectedPoint(point)}
+                            >
+                                {/* Label */}
+                                <div
+                                    className={`text-xl font-medium text-right w-[75.4%] pr-6 transition-colors duration-200 ease-in-out
+                    ${
+                        isSelected
+                            ? "text-[#3b1401]"
+                            : "text-black group-hover:text-[#301000]"
+                    }`}
+                                >
+                                    {point.label}
+                                </div>
 
-    return (
-        <div
-            key={point.id}
-            className="flex items-center cursor-pointer w-full group"
-            onClick={() => setSelectedPoint(point)}
-        >
-            {/* Label */}
-            <div
-                className={`text-xl font-medium text-right w-[75.3%] pr-6 transition-colors duration-200 ease-in-out
-                    ${isSelected ? "text-[#3b1401]" : "text-black group-hover:text-[#301000]"}`}
-            >
-                {point.label}
-            </div>
-
-            {/* Point */}
-            <div
-                className={`
+                                {/* Point */}
+                                <div
+                                    className={`
                     w-6 h-6 rounded-full transition-all duration-200 ease-in-out
-                    ${isSelected
-                        ? "bg-[#3b1401] border-4 border-[#FFFDFA]"
-                        : "bg-[#FFFDFA] border-4 border-[#301000] group-hover:bg-[#301000] group-hover:border-[#FFFDFA]"}
+                    ${
+                        isSelected
+                            ? "bg-[#3b1401] border-4 border-[#FFFDFA]"
+                            : "bg-[#FFFDFA] border-4 border-[#301000] group-hover:bg-[#301000] group-hover:border-[#FFFDFA]"
+                    }
                 `}
-                style={{ marginLeft: "-12px" }}
-            ></div>
-        </div>
-    );
-})}
+                                    style={{ marginLeft: "-12px" }}
+                                ></div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
