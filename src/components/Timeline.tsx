@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Pill from "./common/reusable/Pill";
 
 export default function Timeline() {
     const timelinePoints = [
@@ -7,6 +8,7 @@ export default function Timeline() {
             label: "Amazon",
             role: "Software Development Engineer Intern",
             date: "May 2025 - Present | Vancouver BC",
+            skills: ["Java", "Postgres", "aws"],
             details:
                 "Building digital accelration tools for Amazon Entertainment products and services.\n\nMore to come...",
         },
@@ -14,6 +16,7 @@ export default function Timeline() {
             id: 2,
             label: "Stanford Emergency Medicine",
             role: "Student Researcher",
+            skills: ["TypeScript", "LightGBM", "React", "aws", "LLM"],
             date: "May 2024 - Present | Palo Alto - Remote",
             details:
                 "Developing and benchmarking ML models used to analyze live ED-data.\nBuilding and maintaining AWS infrastructure used to transport, analyze, and feed data to our frontend dashboard.\nExpanding our UI to support new metrics and analytics on live patient data.",
@@ -23,6 +26,14 @@ export default function Timeline() {
             label: "Rivian",
             role: "Software Engineer Intern",
             date: "May 2024 - Dec 2024 | Vancouver BC",
+            skills: [
+                "TypeScript",
+                "Python",
+                "pytest",
+                "React",
+                "aws",
+                "protobuf",
+            ],
             details:
                 "Created various tools to aid and accelrate the integration of mobile app features.\nThese tools include a Python based vehicle simulator,  a Google Protocol Buffer message publishing framework, and a React, Typescript, and AWS based vehicle simulator dashboard.\nDuring my time here, I also lead the integration of various mobile app features including the 2024 Halloween feature, overseeing development and testing.",
         },
@@ -31,6 +42,7 @@ export default function Timeline() {
             label: "UBC Cloud Innovation Centre",
             role: "Software Developer Co-op",
             date: "Jan 2023 - Aug 2023 | Vancouver BC",
+            skills: ["Flutter", "aws", "React", "Postgres"],
             details:
                 "Developed cloud-based healthcare projects to help physical rehabilitation and Parkinson's patients, researchers, and doctors.\nBuilt multiple Flutter apps to collect data to feed to our AWS supported backends for ML analysis, data processing, and storage.\nDesigned and developed multiple accessible mobile apps to display analytics and metrics for patients and doctors.",
         },
@@ -100,7 +112,12 @@ export default function Timeline() {
                     {selectedPoint.role}
                 </h2>
                 <div className="mb-4 text-[#526370]">{selectedPoint.date}</div>
-                <p className="text-lg text-black whitespace-pre-line">
+                <div className="space-x-2 mb-5">
+                    {selectedPoint.skills.map((skill) => (
+                        <Pill key={skill} text={skill} />
+                    ))}
+                </div>
+                <p className="text-base text-black leading-7 whitespace-pre-line">
                     {selectedPoint.details}
                 </p>
             </div>
