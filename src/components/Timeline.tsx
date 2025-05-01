@@ -19,7 +19,7 @@ export default function Timeline() {
             skills: ["TypeScript", "LightGBM", "React", "aws", "LLM"],
             date: "May 2024 - Present | Palo Alto - Remote",
             details:
-                "Developing and benchmarking ML models used to analyze live ED-data.\nBuilding and maintaining AWS infrastructure used to transport, analyze, and feed data to our frontend dashboard.\nExpanding our UI to support new metrics and analytics on live patient data.",
+                "Developing and benchmarking ML models used to analyze live ED-data.\nBuilding and maintaining AWS infrastructure used to transform, analyze, and feed data to our frontend dashboard.\nExpanding our UI to support new metrics and analytics on live patient data.",
         },
         {
             id: 3,
