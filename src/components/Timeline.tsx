@@ -42,7 +42,7 @@ export default function Timeline() {
             label: "UBC Cloud Innovation Centre",
             role: "Software Developer Co-op",
             date: "Jan 2023 - Aug 2023 | Vancouver BC",
-            skills: ["Flutter", "aws", "React", "Postgres"],
+            skills: ["Flutter", "aws", "TypeScript", "React", "Postgres"],
             details:
                 "Developed cloud-based healthcare projects to help physical rehabilitation and Parkinson's patients, researchers, and doctors.\nBuilt multiple Flutter apps to collect data to feed to our AWS supported backends for ML analysis, data processing, and storage.\nDesigned and developed multiple accessible mobile apps to display analytics and metrics for patients and doctors.",
         },
