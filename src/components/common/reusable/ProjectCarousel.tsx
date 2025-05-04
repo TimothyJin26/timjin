@@ -38,10 +38,10 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                         <div
                             key={idx}
                             ref={(el) => (cardRefs.current[idx] = el)}
-                            className="w-[65%] h-[58vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
+                            className="w-[65%] h-[56vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
                         >
                             {/* Image on the left */}
-                            <div className="flex justify-center items-center m-8">
+                            <div className="flex justify-center items-center m-6">
                                 <img
                                     src={lumo} // or proj.icon if you include it directly in your data
                                     alt={proj.title}
@@ -50,15 +50,15 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                             </div>
 
                             {/* Text content */}
-                            <div className="flex flex-col justify-between h-full w-2/6 py-12 mr-8">
+                            <div className="flex flex-col justify-between h-full w-2/6 py-10 mr-8">
                                 <div>
-                                    <h2 className="text-3xl font-bold mb-4">
+                                    <h2 className="text-xl font-bold mb-2">
                                         {proj.title}
                                     </h2>
-                                    <p className="text-gray-700 mb-4">
+                                    <p className="text-[#526370] text-sm mb-4">
                                         {proj.description}
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mb-5">
+                                    <div className="flex flex-wrap gap-2 mb-5 transform scale-90 origin-top-left">
                                         {proj.skills.map((skill) => (
                                             <Pill key={skill} text={skill} />
                                         ))}
