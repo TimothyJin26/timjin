@@ -63,7 +63,6 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                             <Pill key={skill} text={skill} />
                                         ))}
                                     </div>
-                              
                                 </div>
                                 <div className="flex gap-4">
                                     {proj.links.map((link, i) => (
