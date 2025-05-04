@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Project } from "../../../types";
 import transitIcon from "../../../assets/bus-simple-solid.svg";
 import lumo from "../../../assets/lumo.png";
+import Pill from "./Pill";
 
 const iconMap: Record<string, string> = {
     Lumo: transitIcon,
@@ -37,19 +38,19 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                         <div
                             key={idx}
                             ref={(el) => (cardRefs.current[idx] = el)}
-                            className="w-[70%] h-[58vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center p-8 flex items-center gap-6"
+                            className="w-[65%] h-[58vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
                         >
                             {/* Image on the left */}
-                            <div className="w-3/4 flex justify-center items-center">
+                            <div className="flex justify-center items-center m-8">
                                 <img
                                     src={lumo} // or proj.icon if you include it directly in your data
                                     alt={proj.title}
-                                    className="max-w-full object-contain"
+                                    className="object-contain"
                                 />
                             </div>
 
                             {/* Text content */}
-                            <div className="flex flex-col justify-between h-full w-1/4">
+                            <div className="flex flex-col justify-between h-full w-2/6 py-12 mr-8">
                                 <div>
                                     <h2 className="text-3xl font-bold mb-4">
                                         {proj.title}
@@ -57,16 +58,12 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                     <p className="text-gray-700 mb-4">
                                         {proj.description}
                                     </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {proj.skills.map((skill, i) => (
-                                            <span
-                                                key={i}
-                                                className="px-2 py-1 text-sm bg-gray-200 rounded"
-                                            >
-                                                {skill}
-                                            </span>
+                                    <div className="flex flex-wrap gap-2 mb-5">
+                                        {proj.skills.map((skill) => (
+                                            <Pill key={skill} text={skill} />
                                         ))}
                                     </div>
+                              
                                 </div>
                                 <div className="flex gap-4">
                                     {proj.links.map((link, i) => (

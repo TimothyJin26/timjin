@@ -5,26 +5,26 @@ import ProjectCarousel from "./common/reusable/ProjectCarousel";
 const projects: Project[] = [
     {
         title: "Lumo",
-        skills: ["React", "AWS", "Machine Learning"],
+        skills: ["TypeScript", "aws", "Swift", "Claude", "LLM", "NoSQL"],
         description:
             "A platform to match donors with disaster relief charities in real-time.",
         links: [{ label: "GitHub", href: "https://github.com/yourname/lumo" }],
     },
     {
         title: "Vancouver Transit",
-        skills: ["Node.js", "Express", "MongoDB"],
+        skills: ["Flutter"],
         description: "Live public transit route predictor for urban commuters.",
         links: [{ label: "Website", href: "https://transit.example.com" }],
     },
     {
         title: "Balance Test",
-        skills: ["Node.js", "Express", "MongoDB"],
+        skills: ["Flutter", "aws", "React", "TypeScript", "Postgres"],
         description: "Live public transit route predictor for urban commuters.",
         links: [{ label: "Website", href: "https://transit.example.com" }],
     },
     {
         title: "Parkinson's Survey App",
-        skills: ["Node.js", "Express", "MongoDB"],
+        skills: ["TypeScript", "Flutter", "aws"],
         description: "Live public transit route predictor for urban commuters.",
         links: [{ label: "Website", href: "https://transit.example.com" }],
     },

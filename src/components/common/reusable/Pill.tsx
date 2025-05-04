@@ -11,7 +11,7 @@ const colorMap: Record<string, string> = {
     LLM: "74AA9C",
     Postgres: "0044FF",
     NoSQL: "0044FF",
-    Swift: "FF4400",
+    Swift: "e4493a",
     Java: "f89820",
     LightGBM: "ef4927",
     React: "61dbfb",
