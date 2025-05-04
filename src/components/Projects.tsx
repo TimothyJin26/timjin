@@ -1,57 +1,39 @@
-import React, { useRef } from "react";
+import React from "react";
+import { Project } from "../types";
+import ProjectCarousel from "./common/reusable/ProjectCarousel";
 
-const projectNames = ["Lumo", "Transit", "Balance Test", "Parkinsons", "This Website"];
+const projects: Project[] = [
+  {
+    title: "Lumo",
+    skills: ["React", "AWS", "Machine Learning"],
+    description: "A platform to match donors with disaster relief charities in real-time.",
+    links: [{ label: "GitHub", href: "https://github.com/yourname/lumo" }],
+  },
+  {
+    title: "Transit",
+    skills: ["Node.js", "Express", "MongoDB"],
+    description: "Live public transit route predictor for urban commuters.",
+    links: [{ label: "Website", href: "https://transit.example.com" }],
+  },
+  {
+    title: "Transit",
+    skills: ["Node.js", "Express", "MongoDB"],
+    description: "Live public transit route predictor for urban commuters.",
+    links: [{ label: "Website", href: "https://transit.example.com" }],
+  },
+  // add more projects...
+];
 
 const Projects: React.FC = () => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  return (
+    <div className="h-screen flex flex-col overflow-hidden pt-32 items-center">
+      <div className="w-full px-24">
+        <div className="text-4xl font-bold text-[#301000] mb-12">Projects</div>
+      </div>
 
-    const scrollToCard = (index: number) => {
-        const card = cardRefs.current[index];
-        card?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    };
-
-    return (
-        <div className="h-screen flex flex-col overflow-hidden pt-32 items-center">
-            {/* Title container */}
-            <div className="w-full px-24">
-                <div className="text-4xl font-bold text-[#301000] mb-12">
-                    Projects
-                </div>
-            </div>
-
-            {/* Scrollable projects */}
-            <div className="relative w-full">
-                <div
-                    className="flex overflow-x-auto snap-x snap-mandatory space-x-8 px-24 pb-10 cursor-grab no-scrollbar"
-                    style={{ scrollSnapType: "x mandatory" }}
-                >
-                    {projectNames.map((name, idx) => (
-                        <div
-                            key={idx}
-                            ref={el => cardRefs.current[idx] = el}
-                            className="min-w-[900px] h-[600px] bg-orange-200 rounded-xl flex-shrink-0 snap-center shadow-lg flex items-center justify-center text-2xl font-semibold"
-                        >
-                            {name}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Tabs */}
-            <div className="flex space-x-6 mt-6">
-                {projectNames.map((name, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => scrollToCard(idx)}
-                        className="px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium"
-                    >
-                        {name}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
+      <ProjectCarousel projects={projects} />
+    </div>
+  );
 };
 
 export default Projects;
