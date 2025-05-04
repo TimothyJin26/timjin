@@ -1,14 +1,17 @@
 import React, { useRef } from "react";
 import { Project } from "../../../types";
-import transitIcon from "../../../assets/bus-simple-solid.svg";
+import transitIcon from "../../../assets/bus.svg";
+import lightIcon from "../../../assets/lightbulb.svg";
+import balanceTest from "../../../assets/balance-test.svg";
+import checkbox from "../../../assets/checkbox.svg";
 import lumo from "../../../assets/lumo.png";
 import Pill from "./Pill";
 
 const iconMap: Record<string, string> = {
-    Lumo: transitIcon,
+    Lumo: lightIcon,
     "Vancouver Transit": transitIcon,
-    "Balance Test": transitIcon,
-    "Parkinson's Survey App": transitIcon,
+    "Balance Test": balanceTest,
+    "Parkinson's Survey App": checkbox,
 };
 
 interface Props {
@@ -89,7 +92,7 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                     <button
                         key={idx}
                         onClick={() => scrollToCard(idx)}
-                        className="px-2 py-2 rounded-full bg-[#f8f8f6] hover:bg-[#F6F6F2] text-gray-800 font-medium"
+                        className="px-2 py-2 rounded-full bg-[#f8f8f6] hover:bg-[#F6F6F2]"
                     >
                         <img
                             src={iconMap[proj.title]}

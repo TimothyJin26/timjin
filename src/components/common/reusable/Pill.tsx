@@ -19,6 +19,10 @@ const colorMap: Record<string, string> = {
     pytest: "c7d303",
     protobuf: "0b9d57",
     Flutter: "42d2fd",
+    Dart: "1d5b9a",
+    iOS: "f00008",
+    Android: "3DDC84",
+    Xcode: "2b69de",
 };
 
 const Pill: React.FC<PillProps> = ({ text }) => {
