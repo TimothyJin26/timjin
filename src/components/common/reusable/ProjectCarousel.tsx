@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Project } from "../types";
+import { Project } from "../../../types";
 
 interface Props {
   projects: Project[];
