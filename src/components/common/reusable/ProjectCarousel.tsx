@@ -6,6 +6,7 @@ import balanceTest from "../../../assets/balance-test.svg";
 import checkbox from "../../../assets/checkbox.svg";
 import lumo from "../../../assets/lumo.png";
 import Pill from "./Pill";
+import LinkPill from "./LinkPill";
 
 const iconMap: Record<string, string> = {
     Lumo: lightIcon,
@@ -63,21 +64,21 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                     </p>
                                     <div className="flex flex-wrap gap-2 mb-5 transform scale-90 origin-top-left">
                                         {proj.skills.map((skill) => (
-                                            <Pill key={skill} text={skill} />
+                                            <Pill
+                                                key={skill}
+                                                text={skill}
+                                                small={true}
+                                            />
                                         ))}
                                     </div>
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-2">
                                     {proj.links.map((link, i) => (
-                                        <a
+                                        <LinkPill
                                             key={i}
-                                            href={link.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-blue-600 hover:underline"
-                                        >
-                                            {link.label}
-                                        </a>
+                                            text={link.label}
+                                            link={link.href}
+                                        ></LinkPill>
                                     ))}
                                 </div>
                             </div>

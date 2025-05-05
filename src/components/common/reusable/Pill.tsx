@@ -2,6 +2,7 @@ import React from "react";
 
 interface PillProps {
     text: string;
+    small?: boolean;
 }
 
 const colorMap: Record<string, string> = {
@@ -25,14 +26,16 @@ const colorMap: Record<string, string> = {
     Xcode: "2b69de",
 };
 
-const Pill: React.FC<PillProps> = ({ text }) => {
+const Pill: React.FC<PillProps> = ({ text, small }) => {
     const colorHex = colorMap[text] ?? "#FFFFFF";
 
     return (
         <div
-            className="inline-block px-4 py-2 text-sm rounded-full text-[#526370]"
+            className={`inline-block rounded-full text-[#526370] ${
+                small ? "px-3 py-2 text-xs" : "px-4 py-2 text-sm"
+            }`}
             style={{
-                backgroundColor: `#${colorHex}26`, // Adds 15% opacity (hex + 26 = opacity 15%)
+                backgroundColor: `#${colorHex}26`,
             }}
         >
             {text}

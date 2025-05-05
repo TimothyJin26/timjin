@@ -5,33 +5,83 @@ import ProjectCarousel from "./common/reusable/ProjectCarousel";
 const projects: Project[] = [
     {
         title: "Lumo",
-        skills: ["TypeScript", "aws", "Swift", "Claude", "LLM", "NoSQL", "iOS", "Xcode"],
+        skills: [
+            "TypeScript",
+            "aws",
+            "Swift",
+            "Claude",
+            "LLM",
+            "NoSQL",
+            "iOS",
+            "Xcode",
+        ],
         description:
             "A social platform that connects friends through emotionally context-aware messages.",
-        links: [{ label: "GitHub", href: "https://github.com/yourname/lumo" }],
+        links: [
+            {
+                label: "GitHub",
+                href: "https://github.com/karenzhao35/nwHacks2025/tree/main",
+            },
+            {
+                label: "Devpost",
+                href: "https://devpost.com/software/lumo-uofbck",
+            },
+        ],
     },
     {
         title: "Vancouver Transit",
         skills: ["Flutter", "Dart", "iOS", "Android", "Xcode"],
         description:
             "Live public transit iOS and Android app for Vancouver commuters.",
-        links: [{ label: "Website", href: "https://transit.example.com" }],
+        links: [
+            {
+                label: "GitHub",
+                href: "https://github.com/TimothyJin26/TransitApp",
+            },
+            { label: "Website", href: "https://jttechnologyapps.com" },
+        ],
     },
     {
         title: "Balance Test",
-        skills: ["Flutter", "aws", "React", "TypeScript", "Postgres", "iOS", "Android", "Xcode"],
+        skills: [
+            "Flutter",
+            "aws",
+            "React",
+            "TypeScript",
+            "Postgres",
+            "iOS",
+            "Android",
+            "Xcode",
+        ],
         description:
             "A platform to enhance physical rehabilitation through ML analysis of IMU data.",
-        links: [{ label: "Website", href: "https://transit.example.com" }],
+        links: [
+            {
+                label: "GitHub",
+                href: "https://github.com/UBC-CIC/balance-test-app",
+            },
+            {
+                label: "Website",
+                href: "https://cic.ubc.ca/project/application-to-assess-patients-balance-level",
+            },
+        ],
     },
     {
         title: "Parkinson's Survey App",
         skills: ["TypeScript", "Flutter", "aws", "iOS", "Android", "Xcode"],
         description:
             "An iOS app to aid researchers in the collection of Parkinson symptoms data.",
-        links: [{ label: "Website", href: "https://transit.example.com" }],
+        links: [
+            {
+                label: "GitHub",
+                href: "https://github.com/UBC-CIC/parkinsons-backend",
+            },
+            {
+                label: "Website",
+                href: "https://cic.ubc.ca/project/parkinsons-woq-19-survey-application",
+            },
+        ],
     },
-    // add more projects...
 ];
 
 const Projects: React.FC = () => {
