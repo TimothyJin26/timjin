@@ -50,7 +50,7 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                         <div
                             key={idx}
                             ref={(el) => (cardRefs.current[idx] = el)}
-                            className="w-[65%] h-[56vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
+                            className="w-[65%] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
                         >
                             {/* Image on the left */}
                             <div className="flex justify-center items-center m-6 w-3/4">
