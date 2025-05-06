@@ -53,12 +53,24 @@ br {
     font-family: inherit; /* Inherit font from parent */
 }
 
-html, body, #root {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+html,
+body,
+#root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Custom utility to hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 /* * {
     outline: 1px solid red;
-  } */
+} */
