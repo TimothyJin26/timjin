@@ -5,6 +5,7 @@ import lightIcon from "../../../assets/lightbulb.svg";
 import balanceTest from "../../../assets/balance-test.svg";
 import checkbox from "../../../assets/checkbox.svg";
 import lumo from "../../../assets/lumo.png";
+import transit from "../../../assets//transit.png";
 import Pill from "./Pill";
 import LinkPill from "./LinkPill";
 
@@ -13,6 +14,13 @@ const iconMap: Record<string, string> = {
     "Vancouver Transit": transitIcon,
     "Balance Test": balanceTest,
     "Parkinson's Survey App": checkbox,
+};
+
+const imageMap: Record<string, string> = {
+    Lumo: lumo,
+    "Vancouver Transit": transit,
+    "Balance Test": lumo,
+    "Parkinson's Survey App": lumo,
 };
 
 interface Props {
@@ -45,18 +53,18 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                             className="w-[65%] h-[56vh] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
                         >
                             {/* Image on the left */}
-                            <div className="flex justify-center items-center m-6">
+                            <div className="flex justify-center items-center m-6 w-3/4">
                                 <img
-                                    src={lumo} // or proj.icon if you include it directly in your data
+                                    src={imageMap[proj.title]}
                                     alt={proj.title}
-                                    className="object-contain"
+                                    className="object-contain rounded-xl"
                                 />
                             </div>
 
                             {/* Text content */}
-                            <div className="flex flex-col justify-between h-full w-2/6 py-10 mr-8">
+                            <div className="flex flex-col justify-between h-full w-1/4 py-10 mr-8">
                                 <div>
-                                    <h2 className="text-xl font-bold mb-2">
+                                    <h2 className="text-lg font-bold mb-2">
                                         {proj.title}
                                     </h2>
                                     <p className="text-[#526370] text-sm mb-4">
