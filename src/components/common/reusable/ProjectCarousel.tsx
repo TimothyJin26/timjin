@@ -6,6 +6,8 @@ import balanceTest from "../../../assets/balance-test.svg";
 import checkbox from "../../../assets/checkbox.svg";
 import lumo from "../../../assets/lumo.png";
 import transit from "../../../assets//transit.png";
+import balanceHero from "../../../assets/balance-test-hero.png";
+import parkinsonsHero from "../../../assets/parkinsons-hero.png";
 import Pill from "./Pill";
 import LinkPill from "./LinkPill";
 
@@ -19,8 +21,8 @@ const iconMap: Record<string, string> = {
 const imageMap: Record<string, string> = {
     Lumo: lumo,
     "Vancouver Transit": transit,
-    "Balance Test": lumo,
-    "Parkinson's Survey App": lumo,
+    "Balance Test": balanceHero,
+    "Parkinson's Survey App": parkinsonsHero,
 };
 
 interface Props {
