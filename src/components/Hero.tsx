@@ -17,7 +17,7 @@ export default function Hero() {
                             sequence={[
                                 "Hi! I'm Tim 👋",
                                 1500,
-                                "Hi! I'm Tim 👋, a third year Computer Science student at UBC",
+                                "Hi! I'm Tim 👋, a fourth year Computer Science student at UBC",
                                 1500,
                                 "Use the links below to reach out!",
                                 1000,
