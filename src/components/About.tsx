@@ -1,4 +1,4 @@
-import me from "../assets/me.webp";
+import me from "../assets/Me.webp";
 
 export default function About() {
     return (
