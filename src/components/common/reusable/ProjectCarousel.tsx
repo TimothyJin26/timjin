@@ -66,7 +66,7 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                             {/* Text content */}
                             <div className="flex flex-col justify-between h-full w-1/4 py-10 mr-8">
                                 <div>
-                                    <h2 className="text-lg font-bold mb-2">
+                                    <h2 className="text-lg font-bold mb-2 text-black">
                                         {proj.title}
                                     </h2>
                                     <p className="text-[#526370] text-sm mb-4">

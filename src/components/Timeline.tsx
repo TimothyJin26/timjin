@@ -1,52 +1,28 @@
 import { useState } from "react";
 import Pill from "./common/reusable/Pill";
+import notionData from "../data/notion.json";
 
 export default function Timeline() {
-    const timelinePoints = [
-        {
-            id: 1,
-            label: "Amazon",
-            role: "Software Development Engineer Intern",
-            date: "May 2025 - Present | Vancouver BC",
-            skills: ["Java", "Postgres", "aws"],
+
+    const timelinePoints = notionData.map((item) => {
+        const properties = item.properties || {};
+
+        return {
+            id: properties.Id?.number ?? item.id, // Use custom Id, fallback to Notion UUID
+            label: properties.Company?.title?.[0]?.plain_text || "Unknown Company",
+            role: properties.Role?.rich_text?.[0]?.plain_text || "Unknown Role",
+            date:
+                (properties.Dates?.rich_text?.[0]?.plain_text || "Unknown Dates") +
+                " | " +
+                (properties.Location?.rich_text?.[0]?.plain_text || "Unknown Location"),
+            skills: (properties.Skills?.multi_select || []).map((skill) => skill.name),
             details:
-                "Building digital accelration tools for Amazon Entertainment products and services.\n\nMore to come...",
-        },
-        {
-            id: 2,
-            label: "Stanford Emergency Medicine",
-            role: "Student Researcher",
-            skills: ["TypeScript", "LightGBM", "React", "aws", "LLM"],
-            date: "May 2024 - Present | Palo Alto - Remote",
-            details:
-                "Developing and benchmarking ML models used to analyze live ED-data.\nBuilding and maintaining AWS infrastructure used to transform, analyze, and feed data to our frontend dashboard.\nExpanding our UI to support new metrics and analytics on live patient data.",
-        },
-        {
-            id: 3,
-            label: "Rivian",
-            role: "Software Engineer Intern",
-            date: "May 2024 - Dec 2024 | Vancouver BC",
-            skills: [
-                "TypeScript",
-                "Python",
-                "pytest",
-                "React",
-                "aws",
-                "protobuf",
-            ],
-            details:
-                "Created various tools to aid and accelrate the integration of mobile app features.\nThese tools include a Python based vehicle simulator,  a Google Protocol Buffer message publishing framework, and a React, Typescript, and AWS based vehicle simulator dashboard.\nDuring my time here, I also lead the integration of various mobile app features including the 2024 Halloween feature, overseeing development and testing.",
-        },
-        {
-            id: 4,
-            label: "UBC Cloud Innovation Centre",
-            role: "Software Developer Co-op",
-            date: "Jan 2023 - Aug 2023 | Vancouver BC",
-            skills: ["Flutter", "aws", "React", "Postgres"],
-            details:
-                "Developed cloud-based healthcare projects to help physical rehabilitation and Parkinson's patients, researchers, and doctors.\nBuilt multiple Flutter apps to collect data to feed to our AWS supported backends for ML analysis, data processing, and storage.\nDesigned and developed multiple accessible mobile apps to display analytics and metrics for patients and doctors.",
-        },
-    ];
+                properties.Description?.rich_text
+                    ?.map((desc) => desc.plain_text)
+                    .join("\n") || "No description",
+        };
+    });
+
 
     const [selectedPoint, setSelectedPoint] = useState(timelinePoints[0]);
 
