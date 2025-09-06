@@ -79,8 +79,8 @@ export default function Timeline() {
                 className="w-[60%] py-8 px-12 bg-[#FFFEFC] border-l-4 border-[#301000] rounded-lg overflow-y-auto key={selectedPoint.id} animate-fade-in"
                 style={{
                     boxShadow: `
-                      0 5px 20px -3px rgba(0, 0, 0, 0.1),
-                      0 2px 8px -4px rgba(0, 0, 0, 0.1)
+                      0 5px 10px -3px rgba(0, 0, 0, 0.1),
+                      0 2px 6px -10px rgba(0, 0, 0, 0.1)
                     `,
                 }}
             >
