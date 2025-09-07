@@ -21,7 +21,7 @@ export default function Timeline() {
                     ?.map((desc) => desc.plain_text)
                     .join("\n") || "No description",
         };
-    });
+    }).sort((a, b) => b.id - a.id);
 
 
     const [selectedPoint, setSelectedPoint] = useState(timelinePoints[0]);
