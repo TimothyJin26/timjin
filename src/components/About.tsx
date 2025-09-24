@@ -14,7 +14,7 @@ export default function About() {
                         </div>
                         <div className="text-lg text-black leading-8">
                             <div className="pb-8">
-                                I'm Tim, a fourth year Computer Science student
+                                Hi Edric, I'm Tim, a fourth year Computer Science student
                                 at the University of British Columbia. 
                             </div>
                             <div className="pb-8">
