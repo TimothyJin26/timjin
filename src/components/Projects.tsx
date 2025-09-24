@@ -4,6 +4,29 @@ import ProjectCarousel from "./common/reusable/ProjectCarousel";
 
 const projects: Project[] = [
     {
+        title: "FinHog",
+        skills: [
+            "TypeScript",
+            "React",
+            "aws",
+            "Agentic",
+            "Claude",
+            "LLM",
+        ],
+        description:
+            "An autonomous financial analytics agent that manages and optimizes visualizations based on real-time statistical analysis.",
+        links: [
+            {
+                label: "Website",
+                href: "https://www.finhog.net",
+            },
+            {
+                label: "GitHub",
+                href: "https://github.com/Cheggin/HackMIT2025",
+            },
+        ],
+    },
+    {
         title: "Lumo",
         skills: [
             "TypeScript",

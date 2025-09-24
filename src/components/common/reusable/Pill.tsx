@@ -26,6 +26,7 @@ const colorMap: Record<string, string> = {
     Xcode: "2b69de",
     RAG: "c300ff",
     "Machine Learning": "2e81ff",
+    Agentic: "02ff78",
 };
 
 const Pill: React.FC<PillProps> = ({ text, small }) => {
