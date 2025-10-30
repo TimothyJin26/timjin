@@ -76,7 +76,7 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                     <p className="text-[#526370] text-sm mb-4">
                                         {proj.description}
                                     </p>
-                                    <div className="flex flex-wrap gap-2 mb-5 transform scale-90 origin-top-left">
+                                    <div className="flex flex-wrap gap-2 mb-2 transform scale-90 origin-top-left">
                                         {proj.skills.map((skill) => (
                                             <Pill
                                                 key={skill}
@@ -85,6 +85,21 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                             />
                                         ))}
                                     </div>
+                                    {proj.awards && proj.awards.length > 0 && (
+                                        <div className="mb-4">
+                                            <h3 className="text-sm font-semibold text-black mb-2">
+                                                Awards
+                                            </h3>
+                                            <ul className="text-[#526370] text-xs space-y-1">
+                                                {proj.awards.map((award, i) => (
+                                                    <li key={i} className="flex items-start">
+                                                        <span className="mr-2">🏆</span>
+                                                        <span>{award}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex gap-2">
                                     {proj.links.map((link, i) => (

@@ -15,6 +15,10 @@ const projects: Project[] = [
         ],
         description:
             "An autonomous financial analytics agent that manages and optimizes visualizations based on real-time statistical analysis.",
+        awards: [
+            "1st Place HackMIT winner for Anthropic Best Use of Claude",
+            "2nd Place Best Financial Analytics Agent for Warp"
+        ],
         links: [
             {
                 label: "Website",

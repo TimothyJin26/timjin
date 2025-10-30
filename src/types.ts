@@ -3,5 +3,6 @@ export type Project = {
     skills: string[];
     description: string;
     links: { label: string; href: string }[];
+    awards?: string[];
   };
   
