@@ -22,7 +22,7 @@ export default function Footer() {
                     <Socials />
                 </div>
                 <div className="text-[#696969] text-sm">
-                    © 2025 Timothy Jin
+                    © 2026 Timothy Jin
                 </div>
             </div>
         </>
