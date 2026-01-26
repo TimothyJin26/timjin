@@ -12,7 +12,7 @@ export default function About() {
                         <div className="text-3xl font-semibold text-[#633f3d] pb-16">
                             Here's a little about me
                         </div>
-                        <div className="text-lg text-black leading-8">
+                        <div className="text-xl text-black leading-8 font-sanchez">
                             <div className="pb-8">
                                 I'm Tim, a fourth year Computer Science student
                                 at the University of British Columbia. 
