@@ -11,7 +11,7 @@ export default function AboutPage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin | About</title>
+                <title>Timothy Jin | About</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"

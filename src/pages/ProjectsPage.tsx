@@ -9,7 +9,7 @@ export default function ProjectsPage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin | Projects</title>
+                <title>Timothy Jin | Projects</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"

@@ -12,7 +12,7 @@ export default function HomePage() {
     return (
         <>
             <Helmet>
-                <title>Tim Jin</title>
+                <title>Timothy Jin</title>
                 <meta
                     name="description"
                     content="Student at the University of British Columbia"
