@@ -8,6 +8,7 @@ export default {
                 inria: ["Inria Serif", "serif"],
                 lekton: ["Lekton", "sans-serif"],
                 worksans: ["Work Sans", "serif"],
+                sanchez: ['Sanchez', 'serif'],
             },
             keyframes: {
                 "fade-in": {
