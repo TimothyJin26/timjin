@@ -1,15 +1,26 @@
 import { useState, useRef, useEffect } from "react";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type, type Content } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
-interface Message {
-    role: "user" | "assistant";
-    text: string;
-}
+const SYSTEM_PROMPT = `You are a helpful assistant on Timothy Jin's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly.`;
+
+const tools = [{
+    functionDeclarations: [{
+        name: "provide_resume",
+        description: "Call this when the user asks for a resume, CV, or wants to download Timothy's resume.",
+        parameters: { type: Type.OBJECT, properties: {} },
+    }],
+}];
+
+type ChatMessage =
+    | { role: "user"; text: string }
+    | { role: "assistant"; text: string }
+    | { role: "resume_button" };
 
 export default function Chat() {
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<ChatMessage[]>([]);
+    const [history, setHistory] = useState<Content[]>([]);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -18,6 +29,7 @@ export default function Chat() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        if (messages.length === 0) return;
         const el = scrollRef.current;
         if (el) el.scrollTop = el.scrollHeight;
         containerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -33,24 +45,44 @@ export default function Chat() {
         const text = input.trim();
         if (!text || loading) return;
 
+        const newHistory: Content[] = [...history, { role: "user", parts: [{ text }] }];
         setMessages((prev) => [...prev, { role: "user", text }]);
         setInput("");
         setLoading(true);
 
         try {
             const response = await ai.models.generateContent({
-                model: "gemini-2.0-flash",
-                contents: text,
+                model: "gemini-2.5-flash",
+                contents: newHistory,
+                config: { tools, systemInstruction: SYSTEM_PROMPT },
             });
-            setMessages((prev) => [
-                ...prev,
-                { role: "assistant", text: response.text ?? "" },
-            ]);
-        } catch (err) {
-            setMessages((prev) => [
-                ...prev,
-                { role: "assistant", text: "Sorry, something went wrong." },
-            ]);
+
+            const call = response.functionCalls?.[0];
+
+            if (call?.name === "provide_resume") {
+                // Send tool result back to get a natural follow-up
+                const historyWithCall: Content[] = [
+                    ...newHistory,
+                    { role: "model", parts: [{ functionCall: call }] },
+                    { role: "user", parts: [{ functionResponse: { name: call.name, response: { success: true } } }] },
+                ];
+                const followUp = await ai.models.generateContent({
+                    model: "gemini-2.5-flash",
+                    contents: historyWithCall,
+                    config: { tools, systemInstruction: SYSTEM_PROMPT },
+                });
+                setHistory([...historyWithCall, { role: "model", parts: [{ text: followUp.text ?? "" }] }]);
+                setMessages((prev) => [
+                    ...prev,
+                    { role: "resume_button" },
+                    ...(followUp.text ? [{ role: "assistant" as const, text: followUp.text }] : []),
+                ]);
+            } else {
+                setHistory([...newHistory, { role: "model", parts: [{ text: response.text ?? "" }] }]);
+                setMessages((prev) => [...prev, { role: "assistant", text: response.text ?? "" }]);
+            }
+        } catch {
+            setMessages((prev) => [...prev, { role: "assistant", text: "Sorry, something went wrong." }]);
         } finally {
             setLoading(false);
         }
@@ -70,30 +102,40 @@ export default function Chat() {
                     Have a question?
                 </div>
                 <div className="w-5/6 mx-auto flex flex-col gap-4">
-                    {/* Message history */}
                     <div className="relative">
-                        {/* Fade overlay — only visible when scrolled past top */}
                         {scrolled && (
                             <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#FFFDFA] to-transparent pointer-events-none z-10" />
                         )}
-
                         <div ref={scrollRef} onScroll={handleScroll} className="flex flex-col gap-3 max-h-96 overflow-y-auto pr-2">
-                            {messages.map((msg, i) => (
-                                <div
-                                    key={i}
-                                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                                >
-                                    <div
-                                        className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                            {messages.map((msg, i) => {
+                                if (msg.role === "resume_button") {
+                                    return (
+                                        <div key={i} className="flex justify-start">
+                                            <a
+                                                href="/resume.pdf"
+                                                download
+                                                className="flex items-center gap-2 px-4 py-4 bg-[#f5ede8] text-[#301000] text-sm rounded-full transition-opacity hover:opacity-70"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                                    <path fillRule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                                                </svg>
+                                                Download Resume
+                                            </a>
+                                        </div>
+                                    );
+                                }
+                                return (
+                                    <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                                        <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
                                             msg.role === "user"
                                                 ? "bg-[#301000] text-white rounded-br-sm"
                                                 : "bg-[#f5ede8] text-[#301000] rounded-bl-sm"
-                                        }`}
-                                    >
-                                        {msg.text}
+                                        }`}>
+                                            {msg.text}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                             {loading && (
                                 <div className="flex justify-start">
                                     <div className="bg-[#f5ede8] text-[#301000] px-4 py-3 rounded-2xl rounded-bl-sm text-sm">
@@ -105,7 +147,6 @@ export default function Chat() {
                         </div>
                     </div>
 
-                    {/* Input area */}
                     <div className="flex items-end gap-2 border-2 border-[#301000] rounded-2xl px-4 py-3 focus-within:ring-2 focus-within:ring-[#301000]/30">
                         <textarea
                             className="flex-1 resize-none bg-transparent text-[#301000] placeholder-[#301000]/40 outline-none text-sm leading-relaxed max-h-32"
