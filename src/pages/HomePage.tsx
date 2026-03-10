@@ -2,11 +2,11 @@ import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import Preloader from "../components/common/Preloader";
 import Hero from "../components/Hero";
+import About from "../components/About";
 import Experience from "../components/Experience";
 import Footer from "../components/layout/Footer";
 
 const Navbar = lazy(() => import("../components/layout/Navbar"));
-const About = lazy(() => import("../components/About"));
 
 export default function HomePage() {
     return (

@@ -43,7 +43,7 @@ h1 {
 }
 
 .preloader > svg {
-    stroke: theme(colors.fuchsia.700);
+    stroke: #a21caf;
 }
 
 pre {
@@ -70,6 +70,21 @@ body,
 .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+}
+
+@keyframes message-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-in {
+    animation: message-in 0.6s ease-out;
 }
 
 /* * {
