@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import { GoogleGenAI, Type, type Content, type Tool } from "@google/genai";
 import { projects, internships } from "../content/portfolio";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
-const SYSTEM_PROMPT = `You are a helpful assistant on Timothy Jin's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory.`;
+const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory.
+
+When presenting internship or project information, give a short overview (2-4 sentences) and mention the key projects or highlights by name so the user knows what to ask about. Do not go into full detail on any of them unless the user explicitly asks to elaborate on something specific. End with an invitation for the user to ask for more.`;
 
 const tools: Tool[] = [{
     functionDeclarations: [
@@ -72,7 +75,8 @@ function executeTool(name: string, args: Record<string, string>): unknown {
 type ChatMessage =
     | { role: "user"; text: string }
     | { role: "assistant"; text: string }
-    | { role: "resume_button" };
+    | { role: "resume_button" }
+    | { role: "links"; links: { label: string; href: string }[] };
 
 export default function Chat() {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -129,9 +133,11 @@ export default function Chat() {
                     config: { tools, systemInstruction: SYSTEM_PROMPT },
                 });
                 setHistory([...historyWithCall, { role: "model", parts: [{ text: followUp.text ?? "" }] }]);
+                const links = (toolResult as { links?: { label: string; href: string }[] })?.links;
                 setMessages((prev) => [
                     ...prev,
                     ...(call.name === "provide_resume" ? [{ role: "resume_button" as const }] : []),
+                    ...(links?.length ? [{ role: "links" as const, links }] : []),
                     ...(followUp.text ? [{ role: "assistant" as const, text: followUp.text }] : []),
                 ]);
             } else {
@@ -166,6 +172,23 @@ export default function Chat() {
                         )}
                         <div ref={scrollRef} onScroll={handleScroll} className="flex flex-col gap-3 max-h-96 overflow-y-auto pr-2">
                             {messages.map((msg, i) => {
+                                if (msg.role === "links") {
+                                    return (
+                                        <div key={i} className="flex flex-wrap justify-start gap-2">
+                                            {msg.links.map((link) => (
+                                                <a
+                                                    key={link.href}
+                                                    href={link.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#301000]/20 text-[#301000] text-sm hover:bg-[#f5ede8] transition-colors"
+                                                >
+                                                    {link.label}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    );
+                                }
                                 if (msg.role === "resume_button") {
                                     return (
                                         <div key={i} className="flex justify-start">
@@ -184,12 +207,12 @@ export default function Chat() {
                                 }
                                 return (
                                     <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                                        <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                                        <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
                                             msg.role === "user"
                                                 ? "bg-[#301000] text-white rounded-br-sm"
                                                 : "bg-[#f5ede8] text-[#301000] rounded-bl-sm"
                                         }`}>
-                                            {msg.text}
+                                            {msg.role === "user" ? msg.text : <ReactMarkdown>{msg.text}</ReactMarkdown>}
                                         </div>
                                     </div>
                                 );
