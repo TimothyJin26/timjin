@@ -1,6 +1,6 @@
 # Welcome to my Personal Website!
 
-This website is agentic now! Find the chatbot on the About page and ask questions about my experience and projects! Please don't drain all my Gemini API calls though.
+This website is agentic now! Find the chatbot on the About page and ask questions about my experience and projects! Please don't drain all my Gemini API calls though.  
 This is the source code for my personal website, build with **React** and **Tailwind CSS**.
 Check it out at [timothyjin.com](https://timothyjin.com/)
 
