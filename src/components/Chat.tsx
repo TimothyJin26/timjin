@@ -5,7 +5,7 @@ import { projects, internships } from "../content/portfolio";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
-const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory.
+const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory. When calling get_internship_details, use the exact company name: "Amazon", "Stanford Emergency Medicine", "Rivian", or "UBC AWS Cloud Innovation Centre" (also referred to as UBC CIC). If a user asks for a link, GitHub, website, or demo for a project or internship, call get_project_details or get_internship_details to retrieve them — links are always available via the tools. When you retrieve links, do not include them in your text response — they will be displayed as buttons above your message automatically. Just acknowledge them briefly (e.g. "Here are the links for FinHog:").
 
 When presenting internship or project information, give a short overview (2-4 sentences) and mention the key projects or highlights by name so the user knows what to ask about. Do not go into full detail on any of them unless the user explicitly asks to elaborate on something specific. End with an invitation for the user to ask for more.`;
 
@@ -54,9 +54,14 @@ const tools: Tool[] = [{
 function executeTool(name: string, args: Record<string, string>): unknown {
     switch (name) {
         case "list_projects":
-            return projects.map((p) => ({ name: p.name, summary: p.summary, skills: p.skills }));
+            return projects.map((p) => ({ name: p.name, summary: p.summary, skills: p.skills, awards: p.awards }));
         case "get_project_details": {
-            const project = projects.find((p) => p.name.toLowerCase() === args.name?.toLowerCase());
+            const query = args.name?.toLowerCase() ?? "";
+            const project = projects.find((p) =>
+                p.name.toLowerCase().includes(query) ||
+                query.includes(p.name.toLowerCase()) ||
+                p.awards?.some((a) => a.toLowerCase().includes(query))
+            );
             return project ?? { error: `Project "${args.name}" not found.` };
         }
         case "list_internships":
@@ -105,48 +110,60 @@ export default function Chat() {
         const text = (overrideText ?? input).trim();
         if (!text || loading) return;
 
-        const newHistory: Content[] = [...history, { role: "user", parts: [{ text }] }];
+        let currentHistory: Content[] = [...history, { role: "user", parts: [{ text }] }];
         setMessages((prev) => [...prev, { role: "user", text }]);
         setInput("");
         setLoading(true);
 
+        const pendingLinks: { label: string; href: string }[] = [];
+        let showResumeButton = false;
+
         try {
-            const response = await ai.models.generateContent({
+            let response = await ai.models.generateContent({
                 model: "gemini-3.1-flash-lite-preview",
-                contents: newHistory,
+                contents: currentHistory,
                 config: { tools, systemInstruction: SYSTEM_PROMPT },
             });
 
-            const call = response.functionCalls?.[0];
-            const modelContent = response.candidates?.[0].content;
+            for (let i = 0; i < 5; i++) {
+                const modelContent = response.candidates?.[0]?.content;
+                const callPart = modelContent?.parts?.find(p => p.functionCall);
+                if (!callPart?.functionCall || !modelContent) break;
 
-            if (call?.name && modelContent) {
-                const toolResult = executeTool(call.name, (call.args ?? {}) as Record<string, string>);
-                const historyWithCall: Content[] = [
-                    ...newHistory,
+                const { name, args } = callPart.functionCall;
+                if (!name) break;
+                const toolResult = executeTool(name, (args ?? {}) as Record<string, string>);
+
+                const links = (toolResult as { links?: { label: string; href: string }[] })?.links;
+                if (links?.length) pendingLinks.push(...links);
+                if (name === "provide_resume") showResumeButton = true;
+
+                currentHistory = [
+                    ...currentHistory,
                     modelContent,
-                    { role: "user", parts: [{ functionResponse: { name: call.name, response: { result: toolResult, instruction: call.name === "provide_resume" ? "A download button has been shown to the user. Write a short friendly message telling them they can download it — do not include any URLs or markdown links." : undefined } } }] },
+                    { role: "user", parts: [{ functionResponse: { name, response: { result: toolResult, instruction: name === "provide_resume" ? "A download button has been shown to the user above your message. Write a short friendly message telling them they can download it — do not include any URLs or markdown links." : undefined } } }] },
                 ];
-                const followUp = await ai.models.generateContent({
+
+                response = await ai.models.generateContent({
                     model: "gemini-3.1-flash-lite-preview",
-                    contents: historyWithCall,
+                    contents: currentHistory,
                     config: { tools, systemInstruction: SYSTEM_PROMPT },
                 });
-                setHistory([...historyWithCall, { role: "model", parts: [{ text: followUp.text ?? "" }] }]);
-                const links = (toolResult as { links?: { label: string; href: string }[] })?.links;
-                setMessages((prev) => [
-                    ...prev,
-                    ...(call.name === "provide_resume" ? [{ role: "resume_button" as const }] : []),
-                    ...(links?.length ? [{ role: "links" as const, links }] : []),
-                    ...(followUp.text ? [{ role: "assistant" as const, text: followUp.text }] : []),
-                ]);
-            } else {
-                setHistory([...newHistory, { role: "model", parts: [{ text: response.text ?? "" }] }]);
-                setMessages((prev) => [...prev, { role: "assistant", text: response.text ?? "" }]);
             }
-        } catch (err) {
+
+            const responseText = response.candidates?.[0]?.content?.parts?.filter(p => !p.functionCall).map(p => p.text).join("") ?? "";
+            const finalContent = response.candidates?.[0]?.content;
+            setHistory([...currentHistory, ...(finalContent ? [finalContent] : [{ role: "model" as const, parts: [{ text: responseText }] }])]);
+            setMessages((prev) => [
+                ...prev,
+                ...(showResumeButton ? [{ role: "resume_button" as const }] : []),
+                ...(pendingLinks.length ? [{ role: "links" as const, links: pendingLinks }] : []),
+                ...(responseText ? [{ role: "assistant" as const, text: responseText }] : []),
+            ]);
+        } catch (err: unknown) {
             console.error("API error:", err);
-            setMessages((prev) => [...prev, { role: "assistant", text: "Sorry, something went wrong." }]);
+            const is429 = err instanceof Error && (err.message.includes("429") || err.message.toLowerCase().includes("quota") || err.message.toLowerCase().includes("rate limit"));
+            setMessages((prev) => [...prev, { role: "assistant", text: is429 ? "I'm getting too many requests right now! Please wait a moment and try again." : "Sorry, something went wrong." }]);
         } finally {
             setLoading(false);
         }
