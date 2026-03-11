@@ -27,6 +27,7 @@ const colorMap: Record<string, string> = {
     RAG: "c300ff",
     "Machine Learning": "2e81ff",
     Agentic: "02ff78",
+    DynamoDB: "5eb4ff",
 };
 
 const Pill: React.FC<PillProps> = ({ text, small }) => {
