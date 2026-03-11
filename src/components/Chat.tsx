@@ -1,17 +1,73 @@
 import { useState, useRef, useEffect } from "react";
-import { GoogleGenAI, Type, type Content } from "@google/genai";
+import { GoogleGenAI, Type, type Content, type Tool } from "@google/genai";
+import { projects, internships } from "../content/portfolio";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
-const SYSTEM_PROMPT = `You are a helpful assistant on Timothy Jin's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly.`;
+const SYSTEM_PROMPT = `You are a helpful assistant on Timothy Jin's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory.`;
 
-const tools = [{
-    functionDeclarations: [{
-        name: "provide_resume",
-        description: "Call this when the user asks for a resume, CV, or wants to download Timothy's resume.",
-        parameters: { type: Type.OBJECT, properties: {} },
-    }],
+const tools: Tool[] = [{
+    functionDeclarations: [
+        {
+            name: "provide_resume",
+            description: "Call this when the user asks for a resume, CV, or wants to download Timothy's resume.",
+            parameters: { type: Type.OBJECT, properties: {} },
+        },
+        {
+            name: "list_projects",
+            description: "Returns a list of Timothy's projects with short summaries. Call this when the user asks what projects Timothy has worked on.",
+            parameters: { type: Type.OBJECT, properties: {} },
+        },
+        {
+            name: "get_project_details",
+            description: "Returns full details about a specific project. Call this when the user wants to know more about a particular project.",
+            parameters: {
+                type: Type.OBJECT,
+                properties: {
+                    name: { type: Type.STRING, description: "The name of the project" },
+                },
+                required: ["name"],
+            },
+        },
+        {
+            name: "list_internships",
+            description: "Returns a list of Timothy's internships and work experience. Call this when the user asks about Timothy's work experience or internships.",
+            parameters: { type: Type.OBJECT, properties: {} },
+        },
+        {
+            name: "get_internship_details",
+            description: "Returns full details about a specific internship. Call this when the user wants to know more about a particular internship or company.",
+            parameters: {
+                type: Type.OBJECT,
+                properties: {
+                    company: { type: Type.STRING, description: "The name of the company" },
+                },
+                required: ["company"],
+            },
+        },
+    ],
 }];
+
+function executeTool(name: string, args: Record<string, string>): unknown {
+    switch (name) {
+        case "list_projects":
+            return projects.map((p) => ({ name: p.name, summary: p.summary, skills: p.skills }));
+        case "get_project_details": {
+            const project = projects.find((p) => p.name.toLowerCase() === args.name?.toLowerCase());
+            return project ?? { error: `Project "${args.name}" not found.` };
+        }
+        case "list_internships":
+            return internships.map((i) => ({ company: i.company, role: i.role, dates: i.dates, location: i.location }));
+        case "get_internship_details": {
+            const internship = internships.find((i) => i.company.toLowerCase().includes((args.company ?? "").toLowerCase()));
+            return internship ?? { error: `Internship at "${args.company}" not found.` };
+        }
+        case "provide_resume":
+            return { success: true };
+        default:
+            return { error: "Unknown tool" };
+    }
+}
 
 type ChatMessage =
     | { role: "user"; text: string }
@@ -41,8 +97,8 @@ export default function Chat() {
         }
     }
 
-    async function sendMessage() {
-        const text = input.trim();
+    async function sendMessage(overrideText?: string) {
+        const text = (overrideText ?? input).trim();
         if (!text || loading) return;
 
         const newHistory: Content[] = [...history, { role: "user", parts: [{ text }] }];
@@ -52,36 +108,38 @@ export default function Chat() {
 
         try {
             const response = await ai.models.generateContent({
-                model: "gemini-2.5-flash",
+                model: "gemini-3.1-flash-lite-preview",
                 contents: newHistory,
                 config: { tools, systemInstruction: SYSTEM_PROMPT },
             });
 
             const call = response.functionCalls?.[0];
+            const modelContent = response.candidates?.[0].content;
 
-            if (call?.name === "provide_resume") {
-                // Send tool result back to get a natural follow-up
+            if (call?.name && modelContent) {
+                const toolResult = executeTool(call.name, (call.args ?? {}) as Record<string, string>);
                 const historyWithCall: Content[] = [
                     ...newHistory,
-                    { role: "model", parts: [{ functionCall: call }] },
-                    { role: "user", parts: [{ functionResponse: { name: call.name, response: { success: true } } }] },
+                    modelContent,
+                    { role: "user", parts: [{ functionResponse: { name: call.name, response: { result: toolResult, instruction: call.name === "provide_resume" ? "A download button has been shown to the user. Write a short friendly message telling them they can download it — do not include any URLs or markdown links." : undefined } } }] },
                 ];
                 const followUp = await ai.models.generateContent({
-                    model: "gemini-2.5-flash",
+                    model: "gemini-3.1-flash-lite-preview",
                     contents: historyWithCall,
                     config: { tools, systemInstruction: SYSTEM_PROMPT },
                 });
                 setHistory([...historyWithCall, { role: "model", parts: [{ text: followUp.text ?? "" }] }]);
                 setMessages((prev) => [
                     ...prev,
-                    { role: "resume_button" },
+                    ...(call.name === "provide_resume" ? [{ role: "resume_button" as const }] : []),
                     ...(followUp.text ? [{ role: "assistant" as const, text: followUp.text }] : []),
                 ]);
             } else {
                 setHistory([...newHistory, { role: "model", parts: [{ text: response.text ?? "" }] }]);
                 setMessages((prev) => [...prev, { role: "assistant", text: response.text ?? "" }]);
             }
-        } catch {
+        } catch (err) {
+            console.error("API error:", err);
             setMessages((prev) => [...prev, { role: "assistant", text: "Sorry, something went wrong." }]);
         } finally {
             setLoading(false);
@@ -114,12 +172,12 @@ export default function Chat() {
                                             <a
                                                 href="/resume.pdf"
                                                 download
-                                                className="flex items-center gap-2 px-4 py-4 bg-[#f5ede8] text-[#301000] text-sm rounded-full transition-opacity hover:opacity-70"
+                                                className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#301000]/20 text-[#301000] text-sm hover:bg-[#f5ede8] transition-colors"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
                                                     <path fillRule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
                                                 </svg>
-                                                Download Resume
+                                                <span>Download Resume</span>
                                             </a>
                                         </div>
                                     );
@@ -157,7 +215,7 @@ export default function Chat() {
                             onKeyDown={handleKeyDown}
                         />
                         <button
-                            onClick={sendMessage}
+                            onClick={() => sendMessage()}
                             disabled={loading || !input.trim()}
                             className="text-[#301000] disabled:opacity-30 hover:opacity-60 transition-opacity pb-0.5"
                             aria-label="Send"
@@ -167,6 +225,25 @@ export default function Chat() {
                             </svg>
                         </button>
                     </div>
+                    {/* Quick action buttons */}
+                    {messages.length === 0 && (
+                        <div className="flex flex-wrap justify-center gap-2 pt-1">
+                            {[
+                                { emoji: "📄", label: "View my resume", message: "View Timothy's resume" },
+                                { emoji: "🚀", label: "Explore my projects", message: "Explore Timothy's projects" },
+                                { emoji: "💼", label: "Learn about my internships", message: "Learn about Timothy's internships" },
+                            ].map(({ emoji, label, message }) => (
+                                <button
+                                    key={label}
+                                    onClick={() => sendMessage(message)}
+                                    className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#301000]/20 text-[#301000] text-sm hover:bg-[#f5ede8] transition-colors"
+                                >
+                                    <span>{emoji}</span>
+                                    <span>{label}</span>
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
