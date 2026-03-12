@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { GoogleGenAI, Type, type Content, type Tool } from "@google/genai";
-import { projects, internships } from "../content/portfolio";
+import { projects, internships, personalInfo } from "../content/portfolio";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
@@ -11,6 +11,11 @@ When presenting internship or project information, give a short overview (2-4 se
 
 const tools: Tool[] = [{
     functionDeclarations: [
+        {
+            name: "get_personal_info",
+            description: "Returns personal background information about Timothy such as where he grew up, his school, major, graduation, and hobbies. Call this when the user asks personal questions about Timothy.",
+            parameters: { type: Type.OBJECT, properties: {} },
+        },
         {
             name: "provide_resume",
             description: "Call this when the user asks for a resume, CV, or wants to download Timothy's resume.",
@@ -53,6 +58,8 @@ const tools: Tool[] = [{
 
 function executeTool(name: string, args: Record<string, string>): unknown {
     switch (name) {
+        case "get_personal_info":
+            return personalInfo;
         case "list_projects":
             return projects.map((p) => ({ name: p.name, summary: p.summary, skills: p.skills, awards: p.awards }));
         case "get_project_details": {

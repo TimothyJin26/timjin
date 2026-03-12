@@ -1,3 +1,9 @@
+export const personalInfo = {
+    hometown: "Born and raised in Vancouver, BC.",
+    school: "Currently attending The University of British Columbia, majoring in Computer Science. Graduating in Spring 2026.",
+    hobbies: "When not coding, Timothy enjoys skiing local mountains in the winter, hiking and exploring new places and cities in the summer, trying new restaurants, and doing a bit of photography at the places he visits. Point users to the Gallery tab in the navbar at the top of the website to see some of his favorite shots!",
+};
+
 export type Project = {
     name: string;
     skills: string[];
