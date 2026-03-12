@@ -28,7 +28,7 @@ export const projects: Project[] = [
     {
         name: "FinHog",
         skills: ["TypeScript", "React", "AWS", "Claude", "LLM", "Agentic"],
-        summary: "An autonomous financial analytics agent that manages and optimizes visualizations based on real-time statistical analysis.",
+        summary: "An autonomous financial analytics agent that my team and I built at HackMIT 2025 which manages and optimizes visualizations based on real-time statistical analysis.",
         details: `
 FinHog is an autonomous analytics platform that automatically generates and adapts data visualizations to help users understand large volumes of financial transaction data without manual dashboard configuration. The project was built during HackMIT 2025, where it was developed from concept to a fully working system in under 24 hours.
 
