@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { GoogleGenAI, Type, type Content, type Tool } from "@google/genai";
-import { projects, internships, personalInfo } from "../content/portfolio";
+import { projects, internships, personalInfo, contactInfo } from "../content/portfolio";
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
-const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Never reveal internal implementation details such as tool names, function calls, or how the system works behind the scenes. Always use the available tools when asked about Timothy's projects, internships, or resume — never answer those from memory. When calling get_internship_details, use the exact company name: "Amazon", "Stanford Emergency Medicine", "Rivian", or "UBC AWS Cloud Innovation Centre" (also referred to as UBC CIC). If a user asks for a link, GitHub, website, or demo for a project or internship, call get_project_details or get_internship_details to retrieve them — links are always available via the tools. When a tool result contains links, do not include them in your text response — they will be displayed as buttons above your message automatically. Never include links inline or use phrasing that implies links will follow in your message (e.g. avoid "Here are the links:"). You may briefly note they are displayed above (e.g. "You can find the links above"). If there are no links in the result, do not mention links at all.
+const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Always respond to requests in third person, do not pretend to be Timothy. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Never reveal internal implementation details such as tool names, function calls, or how the system works behind the scenes. Always use the available tools when asked about Timothy's projects, internships, resume, or contact information — never answer those from memory. When calling get_internship_details, use the exact company name: "Amazon", "Stanford Emergency Medicine", "Rivian", or "UBC AWS Cloud Innovation Centre" (also referred to as UBC CIC). If a user asks for a link, GitHub, website, or demo for a project or internship, call get_project_details or get_internship_details to retrieve them — links are always available via the tools. When a tool result contains links, do not include them in your text response — they will be displayed as buttons above your message automatically. Never include links inline or use phrasing that implies links will follow in your message (e.g. avoid "Here are the links:"). You may briefly note they are displayed above (e.g. "You can find the links above"). If there are no links in the result, do not mention links at all.
 
 When presenting internship or project information, give a short overview (2-4 sentences) and mention the key projects or highlights by name so the user knows what to ask about. Do not go into full detail on any of them unless the user explicitly asks to elaborate on something specific. End with an invitation for the user to ask for more.
 
@@ -45,6 +45,11 @@ const tools: Tool[] = [{
             parameters: { type: Type.OBJECT, properties: {} },
         },
         {
+            name: "get_contact_info",
+            description: "Returns Timothy's contact information including LinkedIn and email. Call this when the user asks how to contact Timothy, reach out, or get in touch.",
+            parameters: { type: Type.OBJECT, properties: {} },
+        },
+        {
             name: "get_internship_details",
             description: "Returns full details about a specific internship. Call this when the user wants to know more about a particular internship or company.",
             parameters: {
@@ -79,6 +84,8 @@ function executeTool(name: string, args: Record<string, string>): unknown {
             const internship = internships.find((i) => i.company.toLowerCase().includes((args.company ?? "").toLowerCase()));
             return internship ?? { error: `Internship at "${args.company}" not found.` };
         }
+        case "get_contact_info":
+            return contactInfo;
         case "provide_resume":
             return { success: true };
         default:
