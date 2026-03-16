@@ -250,10 +250,16 @@ export default function Chat() {
                                     </div>
                                 );
                             })}
-                            {loading && (
+                            { loading && (
                                 <div className="flex justify-start">
-                                    <div className="bg-[#f5ede8] text-[#301000] px-4 py-3 rounded-2xl rounded-bl-sm text-sm">
-                                        <span className="animate-pulse">...</span>
+                                    <div className="bg-[#f5ede8] text-[#301000] px-4 py-4 rounded-xl rounded-bl-sm text-sm flex items-center gap-1">
+                                        {[0, 150, 300].map((delay) => (
+                                            <span
+                                                key={delay}
+                                                className="w-1 h-1 rounded-full bg-[#301000] animate-bounce"
+                                                style={{ animationDelay: `${delay}ms` }}
+                                            />
+                                        ))}
                                     </div>
                                 </div>
                             )}
