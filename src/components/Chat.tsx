@@ -193,12 +193,12 @@ export default function Chat() {
     }
 
     return (
-        <div ref={containerRef} className="w-full flex flex-col items-center overflow-x-hidden py-20">
-            <div className="w-5/6">
-                <div className="text-5xl font-bold text-[#301000] pb-16 pl-28">
+        <div ref={containerRef} className="w-full flex flex-col items-center overflow-x-hidden py-10 md:py-20">
+            <div className="w-full px-6 md:w-5/6 md:px-0">
+                <div className="text-3xl md:text-5xl font-bold text-[#301000] pb-8 md:pb-16 md:pl-28">
                     Have a question?
                 </div>
-                <div className="w-5/6 mx-auto flex flex-col gap-4">
+                <div className="w-full md:w-5/6 md:mx-auto flex flex-col gap-4">
                     <div className="relative">
                         {scrolled && (
                             <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-[#FFFDFA] to-transparent pointer-events-none z-10" />

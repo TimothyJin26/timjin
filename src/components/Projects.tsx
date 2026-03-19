@@ -114,8 +114,8 @@ const projects: Project[] = [
 const Projects: React.FC = () => {
     return (
         <div className="h-screen flex flex-col overflow-hidden pt-32 items-center">
-            <div className="w-full px-24">
-                <div className="text-4xl font-bold text-[#301000] mb-12">
+            <div className="w-full px-6 md:px-24">
+                <div className="text-3xl md:text-4xl font-bold text-[#301000] mb-8 md:mb-12">
                     Projects
                 </div>
             </div>

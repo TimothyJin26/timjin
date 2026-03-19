@@ -94,16 +94,16 @@ const Image: React.FC<ImageProps> = ({
                 >
                     ×
                 </button>
-                <div className="relative flex max-w-[90vw] max-h-[95vh] gap-8" onClick={(e) => e.stopPropagation()}>
+                <div className="relative flex flex-col md:flex-row max-w-[90vw] max-h-[95vh] gap-4 md:gap-8" onClick={(e) => e.stopPropagation()}>
                     <div className="flex-shrink-0">
                         <img
                             src={src}
                             alt={alt}
-                            className="max-w-full max-h-[95vh] object-contain"
+                            className="max-w-full max-h-[60vh] md:max-h-[95vh] object-contain"
                         />
                     </div>
-                    <div className="flex-shrink-0 text-gray-300 pt-12 pl-6 min-w-[300px]">
-                        <div className="text-4xl font-medium font-inter mb-8">
+                    <div className="flex-shrink-0 text-gray-300 pt-2 md:pt-12 md:pl-6 md:min-w-[300px]">
+                        <div className="text-2xl md:text-4xl font-medium font-inter mb-4 md:mb-8">
                             {title.split("\n").map((line, index) => (
                                 <span key={index}>
                                     {line}
@@ -115,16 +115,16 @@ const Image: React.FC<ImageProps> = ({
                         </div>
                         {camera !== "?" && (
                             <div className="space-y-4">
-                                <div className="text-lg font-lekton">
+                                <div className="text-sm md:text-lg font-lekton">
                                     {coordinates}
                                 </div>
-                                <div className="text-lg font-lekton">
+                                <div className="text-sm md:text-lg font-lekton">
                                     {camera}
                                 </div>
-                                <div className="text-lg font-lekton">
+                                <div className="text-sm md:text-lg font-lekton">
                                     {lens}
                                 </div>
-                                <div className="text-lg font-lekton">
+                                <div className="text-sm md:text-lg font-lekton">
                                     {shutter}s
                                     <span className="text-[#888888]"> | </span>ƒ
                                     {aperture}
@@ -133,7 +133,7 @@ const Image: React.FC<ImageProps> = ({
                                 </div>
                             </div>
                         )}
-                        <div className="text-lg font-lekton mt-8">
+                        <div className="text-sm md:text-lg font-lekton mt-4 md:mt-8">
                             {date}
                         </div>
                     </div>

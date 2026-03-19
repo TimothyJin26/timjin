@@ -3,21 +3,21 @@ import me from "../assets/Me.webp";
 export default function About() {
     return (
         <>
-            <div className="h-screen w-full flex justify-center items-center overflow-x-hidden">
-                <div className="w-5/6 flex flex-row items-center">
-                    <div className="w-7/12 pl-16">
-                        <div className="text-5xl font-bold text-[#301000] pb-3">
+            <div className="min-h-screen md:h-screen w-full flex justify-center items-center overflow-x-hidden py-24 md:py-0">
+                <div className="w-full px-8 md:w-5/6 md:px-0 flex flex-col md:flex-row items-center gap-10 md:gap-0">
+                    <div className="w-full md:w-7/12 md:pl-16">
+                        <div className="text-3xl md:text-5xl font-bold text-[#301000] pb-3">
                             Glad you stopped by!
                         </div>
-                        <div className="text-3xl font-semibold text-[#633f3d] pb-16">
+                        <div className="text-xl md:text-3xl font-semibold text-[#633f3d] pb-8 md:pb-16">
                             Here's a little about me
                         </div>
-                        <div className="text-xl text-black leading-8 font-sanchez">
-                            <div className="pb-8">
+                        <div className="text-base md:text-xl text-black leading-8 md:leading-8 font-sanchez">
+                            <div className="pb-6 md:pb-8">
                                 I'm Tim, a fourth year Computer Science student
-                                at the University of British Columbia. 
+                                at the University of British Columbia.
                             </div>
-                            <div className="pb-8">
+                            <div className="pb-6 md:pb-8">
                                 I'm passionate about leveraging technology to drive transformative
                                 change in the world in areas like entertainment, healthcare,
                                 productivity and beyond through software development and AI!
@@ -31,11 +31,11 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-5/12 flex justify-center">
+                    <div className="w-full md:w-5/12 flex justify-center">
                         <img
                             src={me}
                             alt="Tim"
-                            className="w-96 h-96 rounded-full object-cover shadow-lg"
+                            className="w-56 h-56 md:w-96 md:h-96 rounded-full object-cover shadow-lg"
                         />
                     </div>
                 </div>

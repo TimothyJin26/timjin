@@ -6,8 +6,8 @@ export default function Hero() {
     return (
         <>
             <div className="h-screen w-full flex flex-col justify-center items-center overflow-x-hidden">
-                <div className="w-5/6 pl-28">
-                    <div className="text-5xl tracking-wide font-bold text-[#301000] pb-3">
+                <div className="w-full px-8 md:w-5/6 md:px-0 md:pl-28">
+                    <div className="text-3xl md:text-5xl tracking-wide font-bold text-[#301000] pb-3">
                         Student, software developer,
                         <br />
                         ML Researcher
