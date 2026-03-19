@@ -35,7 +35,7 @@ const Gallery: React.FC = () => {
             date: "19/05/2024",
             coordinates: "49.269362, -123.256483",
             camera: "DJI Mavic Mini",
-            lens: "1/2.3” CMOS 35mm f/2.8",
+            lens: '1/2.3" CMOS 35mm f/2.8',
             shutter: "1/8",
             aperture: "2.8",
             iso: "800",
@@ -128,28 +128,26 @@ const Gallery: React.FC = () => {
 
     return (
         <>
-            <div className="h-screen flex">
-                <div>
-                    <div className="text-4xl font-bold text-[#301000] pt-32 ml-24">
-                        Gallery
-                    </div>
-                    <div className="w-5/6 mx-auto columns-4 gap-8 mt-16 pb-16">
-                        {images.map((image, index) => (
-                            <Image
-                                key={index}
-                                src={image.src}
-                                alt={`Gallery Image ${index + 1}`}
-                                title={image.title}
-                                date={image.date}
-                                coordinates={image.coordinates}
-                                camera={image.camera}
-                                lens={image.lens}
-                                shutter={image.shutter}
-                                aperture={image.aperture}
-                                iso={image.iso}
-                            />
-                        ))}
-                    </div>
+            <div className="w-full">
+                <div className="text-3xl md:text-4xl font-bold text-[#301000] pt-24 md:pt-32 ml-6 md:ml-24">
+                    Gallery
+                </div>
+                <div className="px-6 md:px-0 md:w-5/6 md:mx-auto columns-2 md:columns-3 lg:columns-4 gap-4 md:gap-8 mt-10 md:mt-16 pb-16">
+                    {images.map((image, index) => (
+                        <Image
+                            key={index}
+                            src={image.src}
+                            alt={`Gallery Image ${index + 1}`}
+                            title={image.title}
+                            date={image.date}
+                            coordinates={image.coordinates}
+                            camera={image.camera}
+                            lens={image.lens}
+                            shutter={image.shutter}
+                            aperture={image.aperture}
+                            iso={image.iso}
+                        />
+                    ))}
                 </div>
             </div>
         </>

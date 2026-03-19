@@ -49,26 +49,26 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
         <>
             <div className="relative w-full">
                 <div
-                    className="flex overflow-x-auto snap-x snap-mandatory space-x-8 px-24 cursor-grab no-scrollbar"
+                    className="flex overflow-x-auto snap-x snap-mandatory space-x-4 md:space-x-8 px-6 md:px-24 cursor-grab no-scrollbar"
                     style={{ scrollSnapType: "x mandatory" }}
                 >
                     {projects.map((proj, idx) => (
                         <div
                             key={idx}
                             ref={(el) => (cardRefs.current[idx] = el)}
-                            className="w-[65%] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex items-center"
+                            className="w-[88%] md:w-[65%] bg-[#F6F6F2] rounded-xl shadow-sm flex-shrink-0 snap-center flex flex-col self-start md:self-auto md:flex-row items-center"
                         >
-                            {/* Image on the left */}
-                            <div className="flex justify-center items-center m-6 w-3/4">
+                            {/* Image */}
+                            <div className="flex justify-center items-center px-4 pt-4 pb-2 md:p-0 md:m-6 w-full md:w-3/4">
                                 <img
                                     src={imageMap[proj.title]}
                                     alt={proj.title}
-                                    className="object-contain rounded-xl"
+                                    className="object-contain rounded-xl max-h-44 md:max-h-none w-full"
                                 />
                             </div>
 
                             {/* Text content */}
-                            <div className="flex flex-col justify-between h-full w-1/4 py-10 mr-8">
+                            <div className="flex flex-col justify-start gap-3 md:justify-between md:gap-0 w-full md:h-full md:w-1/4 px-4 pb-6 md:py-10 md:px-0 md:mr-8">
                                 <div>
                                     <h2 className="text-lg font-bold mb-2 text-black">
                                         {proj.title}
@@ -101,7 +101,7 @@ const ProjectCarousel: React.FC<Props> = ({ projects }) => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 flex-wrap">
                                     {proj.links.map((link, i) => (
                                         <LinkPill
                                             key={i}
