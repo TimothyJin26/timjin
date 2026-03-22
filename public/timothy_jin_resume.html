@@ -49,7 +49,7 @@
     font-family: 'DM Serif Display', serif;
     font-size: 28pt;
     font-weight: 100;
-    letter-spacing: -0.5px;
+    letter-spacing: 0px;
     color: var(--black);
     line-height: 1;
     flex-shrink: 0;
@@ -111,7 +111,7 @@
   }
   .entry-left { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .company {
-    font-size: 10pt;
+    font-size: 10.3pt;
     font-weight: 600;
     color: var(--black);
   }
@@ -121,7 +121,7 @@
     font-size: 11pt;
   }
   .role {
-    font-size: 9.6pt;
+    font-size: 10.0pt;
     font-weight: 400;
     color: var(--mid);
     font-style: italic;
@@ -213,7 +213,7 @@
       right: 0;
       bottom: 0;
       border-bottom: 1px solid #000;
-      transform: scaleY(0.35);
+      transform: scaleY(0.38);
       transform-origin: bottom;
     }
   }
@@ -264,7 +264,7 @@
         <span class="date">May 2025 – Aug 2025</span>
       </div>
       <ul class="bullets">
-        <li><strong>Eliminated engineer intervention for 80% of support tickets</strong> submitted by internal teams for help with the Prime Subscriptions API — built an agentic assistant in <strong>Java, Python, and TypeScript</strong> powered by <strong>AWS and Claude LLMs</strong> to automatically analyze issues, surface insights, and run API tests.</li>
+        <li><strong>Eliminated engineer intervention for 80% of support tickets</strong> submitted by internal teams for help with the Prime Subscriptions API — built an agentic assistant in <strong>Java, Python, and TypeScript</strong> powered by <strong>AWS and Claude LLMs</strong> to automatically analyze user issues, surface insights, and run API tests.</li>
         <li><strong>Reduced debugging time by 80%</strong> by migrating the Prime Subscriptions API from compressed file-based logs (requiring manual grepping) to centralized, queryable <strong>CloudWatch logging</strong> across <strong>9 global deployments</strong>.</li>
         <li><strong>Reduced manual scaling work by 95%</strong> for high-traffic shopping events (e.g. Prime Day) by integrating the Prime API into an automated capacity planning interface, replacing a process that required weeks of manual effort.</li>
       </ul>
@@ -274,16 +274,16 @@
     <div class="entry">
       <div class="entry-header">
         <div class="entry-left">
-          <span class="company">Stanford University — Dept. of Emergency Medicine</span>
+          <span class="company">Stanford University - Dept. of Emergency Medicine</span>
           <span class="divider">|</span>
           <span class="role">Machine Learning Researcher</span>
         </div>
         <span class="date">May 2024 – Oct 2025</span>
       </div>
       <ul class="bullets">
-        <li>Improved emergency department patient outcome prediction by <strong>0.12 AUROC</strong> by tuning and deploying <strong>LightGBM</strong> models on historical patient data, enabling better resource allocation for <strong>100+ patients daily</strong>.</li>
-        <li>Identified the optimal model architecture — <strong>15% better accuracy</strong> — by benchmarking PyTorch transformer and LLM-assisted LightGBM models against baselines across <strong>millions of patient records</strong>.</li>
-        <li>Improved ED physician confidence in model decisions by building a <strong>React + AWS dashboard</strong> with <strong>SHAP-based explainability</strong>, making predictions transparent and actionable for clinical teams.</li>
+        <li>Improved ED patient outcome prediction by <strong>0.12 AUROC</strong> by tuning and deploying <strong>LightGBM</strong> models trained on historical patient data to a hospital dashboard, enabling better resource allocation for <strong>100+ patients daily</strong>.</li>
+        <li>Identified the optimal model architecture—<strong>improving accuracy by 15%</strong>—by benchmarking PyTorch transformer and LLM-assisted LightGBM models against baselines across <strong>millions of patient records</strong>.</li>
+        <li>Improved ED physician confidence in model decisions by building a <strong>React + AWS dashboard</strong> with <strong>SHAP-based explainability</strong>, making predictions transparent and actionable for physicians.</li>
       </ul>
     </div>
 
@@ -298,9 +298,9 @@
         <span class="date">May 2024 – Dec 2024</span>
       </div>
       <ul class="bullets">
-        <li>Maintained <strong>100% feature test coverage</strong> during Rivian's migration from a legacy messaging system to a faster <strong>Protocol Buffers</strong> framework — built Rivian's first <strong>Python Protocol Buffers pub/sub framework</strong> and NATS client tool, enabling hundreds of engineers to test against virtual cloud-based vehicles without relying on scarce physical hardware.</li>
+        <li>Built foundational tooling to validate Rivian’s transition from <strong>REST/GraphQL</strong>-based communication to <strong>Protocol Buffers</strong>, maintaining <strong>100% feature test coverage</strong> by building Rivian’s first <strong>Python Protocol Buffers pub/sub framework</strong> and NATS client tool for simulated cloud-based testing, reducing reliance on limited physical hardware.</li>
         <li>Proposed and drove development of an <strong>agentic React</strong> based full-stack vehicle simulator that let <strong>100+ engineers and designers</strong> test mobile and cloud features avoiding hours of authentication and CLI setup.</li>
-        <li>Led mobile integration of the 2024 Halloween feature and multiple other releases, shipping to <strong>100,000+ customers</strong> across <strong>7 major app versions</strong> by owning test strategy and driving cross-team alignment.</li>
+        <li>Led mobile integration of the 2024 Halloween feature and multiple other features, shipping to <strong>100,000+ customers</strong> across <strong>7 major app releases</strong> by designing test strategy and driving cross-team alignment.</li>
       </ul>
     </div>
 
@@ -308,7 +308,7 @@
     <div class="entry">
       <div class="entry-header">
         <div class="entry-left">
-          <span class="company">UBC Cloud Innovation Centre (AWS)</span>
+          <span class="company">AWS Cloud Innovation Centre (UBC)</span>
           <span class="divider">|</span>
           <span class="role">Software Developer Co-op</span>
         </div>
@@ -349,7 +349,7 @@
         <span class="project-date">Nov 2019 – Jan 2022</span>
       </div>
       <ul class="bullets">
-        <li>Shipped an iOS and Android app providing real-time transit data, reaching <strong>1,000+ active users</strong> and <strong>10,000+ installs</strong> across the Apple App Store and Google Play Store.</li>
+        <li>Shipped a <strong>Flutter</strong> based iOS and Android app providing real-time transit data, reaching <strong>1,000+ active users</strong> and <strong>10,000+ installs</strong> across the Apple App Store and Google Play Store.</li>
       </ul>
     </div>
   </div>
@@ -364,11 +364,11 @@
       </div>
       <div class="skill-row">
         <span class="skill-label">Frameworks &amp; Libraries</span>
-        <span class="skill-val">React, Node.js, Flutter, AWS CDK, Pandas, NumPy, Protocol Buffers, JUnit</span>
+        <span class="skill-val">Protocol Buffers, AWS CDK, Flutter, React, Node.js, Pandas, NumPy, JUnit</span>
       </div>
       <div class="skill-row">
         <span class="skill-label">Tools &amp; Platforms</span>
-        <span class="skill-val">AWS, PostgreSQL, MySQL, Docker, Git, CI/CD, NoSQL, Xcode, Android Studio</span>
+        <span class="skill-val">AWS, PostgreSQL, MySQL, Docker, Git, CI/CD, NoSQL, Xcode, Android Studio, VS Code</span>
       </div>
     </div>
   </div>
