@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timothy Jin – Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0f0f0f;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light: #777;
+    --rule: #d0d0d0;
+    --accent: #1a1a1a;
+    --page-w: 780px;
+    --body-font: 'DM Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--body-font);
+    font-size: 10pt;
+    line-height: 1.38;
+    color: var(--dark);
+    background: #f0ede8;
+    padding: 40px 20px;
+  }
+
+  .page {
+    background: #fff;
+    width: var(--page-w);
+    margin: 0 auto;
+    padding: 32px 50px 32px 50px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── HEADER ── */
+  .header { margin-bottom: 8px; }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 7px;
+    gap: 20px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28pt;
+    font-weight: 100;
+    letter-spacing: -0.5px;
+    color: var(--black);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .header-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 8.8pt;
+    color: var(--mid);
+    align-items: flex-end;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .header-contact a {
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .header-contact a:hover { border-bottom-color: var(--mid); }
+  .header-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    font-size: 8.8pt;
+    color: var(--mid);
+    align-items: center;
+  }
+  .header-links a {
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .header-links a:hover { border-bottom-color: var(--mid); }
+  .sep { margin: 0 7px; color: var(--rule); }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 14px; }
+  .section-title {
+    font-size: 7.5pt;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--black);
+    border-bottom: 0.2px solid var(--black);
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+  }
+
+  /* ── EXPERIENCE / EDUCATION ENTRIES ── */
+  .entry { margin-bottom: 4px; }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3px;
+  }
+  .entry-left { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .company {
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .divider {
+    color: var(--rule);
+    font-weight: 300;
+    font-size: 11pt;
+  }
+  .role {
+    font-size: 9.6pt;
+    font-weight: 400;
+    color: var(--mid);
+    font-style: italic;
+  }
+  .date {
+    font-size: 8.8pt;
+    color: var(--light);
+    white-space: nowrap;
+    font-weight: 400;
+  }
+
+  /* ── BULLETS ── */
+  ul.bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.bullets li {
+    position: relative;
+    padding-left: 13px;
+    margin-bottom: 2px;
+    font-size: 9.25pt;
+    color: var(--dark);
+    line-height: 1.46;
+  }
+  ul.bullets li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--light);
+    font-weight: 300;
+  }
+  strong { font-weight: 600; color: var(--black); }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: flex; flex-direction: column; gap: 2px; }
+  .skill-row { display: flex; gap: 5px; font-size: 9.2pt; }
+  .skill-label { font-weight: 600; color: var(--black); min-width: 145px; flex-shrink: 0; }
+  .skill-val { color: var(--mid); }
+
+  /* ── PROJECTS ── */
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+  .project-name {
+    font-size: 10.4pt;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .project-stack {
+    font-size: 8.8pt;
+    color: var(--light);
+    font-weight: 400;
+    font-style: italic;
+  }
+  .project-date {
+    font-size: 8.8pt;
+    color: var(--light);
+    white-space: nowrap;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-sub {
+    font-size: 9pt;
+    color: var(--mid);
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page { box-shadow: none; padding: 22px 44px; width: 100%; }
+    .section-title {
+      position: relative;
+      border-bottom: none !important;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-bottom: 1px solid #000;
+      transform: scaleY(0.35);
+      transform-origin: bottom;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <h1>Timothy Jin</h1>
+      <div class="header-contact">
+        <a href="https://timothyjin.com">timothyjin.com</a>
+        <a href="mailto:timothy.jin26@gmail.com">timothy.jin26@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-left">
+          <span class="company">The University of British Columbia</span>
+          <span class="divider">|</span>
+          <span class="role">B.Sc. Computer Science — 3.9 / 4.0 GPA</span>
+        </div>
+        <span class="date">Sep 2021 – May 2026</span>
+      </div>
+      <div class="edu-sub">Data Structures &amp; Algorithms · Machine Learning · Networking &amp; Security · Databases · Distributed Systems</div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <!-- Amazon -->
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-left">
+          <span class="company">Amazon</span>
+          <span class="divider">|</span>
+          <span class="role">Software Development Engineer Intern</span>
+        </div>
+        <span class="date">May 2025 – Aug 2025</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Eliminated engineer intervention for 80% of support tickets</strong> submitted by internal teams for help with the Prime Subscriptions API — built an agentic assistant in <strong>Java, Python, and TypeScript</strong> powered by <strong>AWS and Claude LLMs</strong> to automatically analyze issues, surface insights, and run API tests.</li>
+        <li><strong>Reduced debugging time by 80%</strong> by migrating the Prime Subscriptions API from compressed file-based logs (requiring manual grepping) to centralized, queryable <strong>CloudWatch logging</strong> across <strong>9 global deployments</strong>.</li>
+        <li><strong>Reduced manual scaling work by 95%</strong> for high-traffic shopping events (e.g. Prime Day) by integrating the Prime API into an automated capacity planning interface, replacing a process that required weeks of manual effort.</li>
+      </ul>
+    </div>
+
+    <!-- Stanford -->
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-left">
+          <span class="company">Stanford University — Dept. of Emergency Medicine</span>
+          <span class="divider">|</span>
+          <span class="role">Machine Learning Researcher</span>
+        </div>
+        <span class="date">May 2024 – Oct 2025</span>
+      </div>
+      <ul class="bullets">
+        <li>Improved emergency department patient outcome prediction by <strong>0.12 AUROC</strong> by tuning and deploying <strong>LightGBM</strong> models on historical patient data, enabling better resource allocation for <strong>100+ patients daily</strong>.</li>
+        <li>Identified the optimal model architecture — <strong>15% better accuracy</strong> — by benchmarking PyTorch transformer and LLM-assisted LightGBM models against baselines across <strong>millions of patient records</strong>.</li>
+        <li>Improved ED physician confidence in model decisions by building a <strong>React + AWS dashboard</strong> with <strong>SHAP-based explainability</strong>, making predictions transparent and actionable for clinical teams.</li>
+      </ul>
+    </div>
+
+    <!-- Rivian -->
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-left">
+          <span class="company">Rivian</span>
+          <span class="divider">|</span>
+          <span class="role">Software Engineer Intern</span>
+        </div>
+        <span class="date">May 2024 – Dec 2024</span>
+      </div>
+      <ul class="bullets">
+        <li>Maintained <strong>100% feature test coverage</strong> during Rivian's migration from a legacy messaging system to a faster <strong>Protocol Buffers</strong> framework — built Rivian's first <strong>Python Protocol Buffers pub/sub framework</strong> and NATS client tool, enabling hundreds of engineers to test against virtual cloud-based vehicles without relying on scarce physical hardware.</li>
+        <li>Proposed and drove development of an <strong>agentic React</strong> based full-stack vehicle simulator that let <strong>100+ engineers and designers</strong> test mobile and cloud features avoiding hours of authentication and CLI setup.</li>
+        <li>Led mobile integration of the 2024 Halloween feature and multiple other releases, shipping to <strong>100,000+ customers</strong> across <strong>7 major app versions</strong> by owning test strategy and driving cross-team alignment.</li>
+      </ul>
+    </div>
+
+    <!-- UBC CIC -->
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-left">
+          <span class="company">UBC Cloud Innovation Centre (AWS)</span>
+          <span class="divider">|</span>
+          <span class="role">Software Developer Co-op</span>
+        </div>
+        <span class="date">Jan 2023 – Aug 2023</span>
+      </div>
+      <ul class="bullets">
+        <li>Built a <strong>Flutter/Dart mobile app</strong> with an <strong>AWS TypeScript</strong> serverless backend to collect Parkinson's disease symptom data from <strong>thousands of patients annually</strong> with minimal discomfort, supporting clinical research teams.</li>
+        <li>Improved balance assessment for rehabilitation patients using <strong>transformer-based ML</strong> on IMU sensor data, delivered via a <strong>React and Flutter UI</strong> with a TypeScript/Python AWS backend.</li>
+        <li>Presented at the <strong>2024 Interdisciplinary Conference in Rehabilitation Science BC</strong> (INCREASE BC).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <div class="entry">
+      <div class="project-header">
+        <div>
+          <span class="project-name">FinHog</span>
+          <span class="project-stack"> &nbsp;·&nbsp; Agentic AI, TypeScript, Python, AWS, React</span>
+        </div>
+        <span class="project-date">Sep 2025</span>
+      </div>
+      <ul class="bullets">
+        <li>Won <strong>1st place at HackMIT</strong> (1,500 participants) for Anthropic's Best Use of Claude, and <strong>2nd place</strong> for Warp's (YC W23) Best Financial Visualization Agent.</li>
+        <li>Built an <strong>autonomous financial analytics agent</strong> that analyzes data in real time and automatically selects and renders the most informative visualizations — delivered in under 24 hours.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="project-header">
+        <div>
+          <span class="project-name">Vancouver Transit App</span>
+          <span class="project-stack"> &nbsp;·&nbsp; Dart, Flutter, iOS, Android</span>
+        </div>
+        <span class="project-date">Nov 2019 – Jan 2022</span>
+      </div>
+      <ul class="bullets">
+        <li>Shipped an iOS and Android app providing real-time transit data, reaching <strong>1,000+ active users</strong> and <strong>10,000+ installs</strong> across the Apple App Store and Google Play Store.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Languages</span>
+        <span class="skill-val">TypeScript, Python, C++, Java, SQL, JavaScript, Dart, GraphQL, HTML/CSS</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Frameworks &amp; Libraries</span>
+        <span class="skill-val">React, Node.js, Flutter, AWS CDK, Pandas, NumPy, Protocol Buffers, JUnit</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Tools &amp; Platforms</span>
+        <span class="skill-val">AWS, PostgreSQL, MySQL, Docker, Git, CI/CD, NoSQL, Xcode, Android Studio</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
