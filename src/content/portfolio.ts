@@ -6,7 +6,7 @@ export const personalInfo = {
 
 export const contactInfo = {
     links: [
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/timjin26/" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/timothyyjin/" },
         { label: "Email", href: "mailto:timothyjin26@gmail.com" },
     ],
 };
