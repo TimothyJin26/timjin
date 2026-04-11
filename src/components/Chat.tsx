@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import ReactGA from "react-ga4";
 import { GoogleGenAI, Type, type Content, type Tool } from "@google/genai";
 import { projects, internships, personalInfo, contactInfo } from "../content/portfolio";
 
@@ -228,6 +229,7 @@ export default function Chat() {
                                             <a
                                                 href="/resume.pdf"
                                                 download
+                                                onClick={() => ReactGA.event({ category: 'resume', action: 'download', label: 'chat_button' })}
                                                 className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#301000]/20 text-[#301000] text-sm hover:bg-[#f5ede8] transition-colors"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
