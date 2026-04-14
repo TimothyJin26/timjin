@@ -137,7 +137,7 @@ export default function Chat() {
 
         try {
             let response = await ai.models.generateContent({
-                model: "gemini-3.1-flash-lite-preview",
+                model: "gemini-3-flash-preview",
                 contents: currentHistory,
                 config: { tools, systemInstruction: SYSTEM_PROMPT },
             });
@@ -162,7 +162,7 @@ export default function Chat() {
                 ];
 
                 response = await ai.models.generateContent({
-                    model: "gemini-3.1-flash-lite-preview",
+                    model: "gemini-3-flash-preview",
                     contents: currentHistory,
                     config: { tools, systemInstruction: SYSTEM_PROMPT },
                 });
