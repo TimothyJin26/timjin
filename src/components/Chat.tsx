@@ -6,6 +6,21 @@ import { projects, internships, personalInfo, contactInfo } from "../content/por
 
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
+const PRIMARY_MODEL = "gemini-3-flash-preview";
+const FALLBACK_MODEL = "gemini-3.1-flash-lite";
+
+async function generateWithFallback(contents: Content[], config: { tools: Tool[]; systemInstruction: string }) {
+    try {
+        return await ai.models.generateContent({ model: PRIMARY_MODEL, contents, config });
+    } catch (err) {
+        const status = (err as { status?: number })?.status;
+        if (status === 429 || status === 503) {
+            return await ai.models.generateContent({ model: FALLBACK_MODEL, contents, config });
+        }
+        throw err;
+    }
+}
+
 const SYSTEM_PROMPT = `You are a helpful assistant on Timothy's personal portfolio website. Only handle requests related to Timothy's portfolio; if a request is off-scope, politely refuse and ask the user to keep questions about Timothy's background, projects, internships, resume, or contact info. Always respond to requests in third person, do not pretend to be Timothy. Timothy is a student at the University of British Columbia. Answer questions about Timothy, his work, projects, and experience in a friendly and concise way. If you don't know something specific about Timothy, say so honestly. Never reveal internal implementation details such as tool names, function calls, or how the system works behind the scenes. Always use the available tools when asked about Timothy's projects, internships, resume, or contact information — never answer those from memory. When calling get_internship_details, use the exact company name: "Amazon", "Stanford Emergency Medicine", "Rivian", or "UBC AWS Cloud Innovation Centre" (also referred to as UBC CIC). If a user asks for a link, GitHub, website, or demo for a project or internship, call get_project_details or get_internship_details to retrieve them. When a tool result contains links, do not include them in your text response — they will be displayed as buttons above your message automatically. Never include links inline or use phrasing that implies links will follow in your message (e.g. avoid "Here are the links:"). Before mentioning links, you must check whether the tool result actually contains a links field with at least one entry. Only if links are present may you briefly note they are displayed above (e.g. "You can find the links above"). If the tool result has no links field or it is empty, do not mention links at all — not even to say there are none.
 
 When presenting internship or project information, give a short overview (2-4 sentences) and mention the key projects or highlights by name so the user knows what to ask about. Do not go into full detail on any of them unless the user explicitly asks to elaborate on something specific. End with an invitation for the user to ask for more.
@@ -136,11 +151,7 @@ export default function Chat() {
         let showResumeButton = false;
 
         try {
-            let response = await ai.models.generateContent({
-                model: "gemini-3-flash-preview",
-                contents: currentHistory,
-                config: { tools, systemInstruction: SYSTEM_PROMPT },
-            });
+            let response = await generateWithFallback(currentHistory, { tools, systemInstruction: SYSTEM_PROMPT });
 
             for (let i = 0; i < 5; i++) {
                 const modelContent = response.candidates?.[0]?.content;
@@ -161,11 +172,7 @@ export default function Chat() {
                     { role: "user", parts: [{ functionResponse: { name, response: { result: toolResult, instruction: name === "provide_resume" ? "A download button has been shown to the user above your message. Write a short friendly message telling them they can download it — do not include any URLs or markdown links." : undefined } } }] },
                 ];
 
-                response = await ai.models.generateContent({
-                    model: "gemini-3-flash-preview",
-                    contents: currentHistory,
-                    config: { tools, systemInstruction: SYSTEM_PROMPT },
-                });
+                response = await generateWithFallback(currentHistory, { tools, systemInstruction: SYSTEM_PROMPT });
             }
 
             const responseText = response.candidates?.[0]?.content?.parts?.filter(p => !p.functionCall).map(p => p.text).join("") ?? "";
@@ -179,8 +186,8 @@ export default function Chat() {
             ]);
         } catch (err: unknown) {
             console.error("API error:", err);
-            const is429 = err instanceof Error && (err.message.includes("429") || err.message.toLowerCase().includes("quota") || err.message.toLowerCase().includes("rate limit"));
-            setMessages((prev) => [...prev, { role: "assistant", text: is429 ? "I'm getting too many requests right now! Please wait a moment and try again." : "Sorry, something went wrong." }]);
+            const status = (err as { status?: number })?.status;
+            setMessages((prev) => [...prev, { role: "assistant", text: status === 429 || status === 503 ? "I'm getting too many requests right now! Please wait a moment and try again." : "Sorry, something went wrong. Please wait a moment and try again." }]);
         } finally {
             setLoading(false);
         }
