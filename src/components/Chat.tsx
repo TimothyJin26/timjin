@@ -7,7 +7,7 @@ import { projects, internships, personalInfo, contactInfo } from "../content/por
 const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GOOGLE_GENAI_API_KEY });
 
 const PRIMARY_MODEL = "gemini-3-flash-preview";
-const FALLBACK_MODEL = "gemini-3.1-flash-lite-preview";
+const FALLBACK_MODEL = "gemini-3.1-flash-lite";
 
 async function generateWithFallback(contents: Content[], config: { tools: Tool[]; systemInstruction: string }) {
     try {
