@@ -72,6 +72,7 @@ const projects: Project[] = [
         title: "Balance Test",
         skills: [
             "Flutter",
+            "Dart",
             "aws",
             "React",
             "TypeScript",
@@ -95,7 +96,7 @@ const projects: Project[] = [
     },
     {
         title: "Parkinson's Survey App",
-        skills: ["TypeScript", "Flutter", "aws", "iOS", "Android", "Xcode"],
+        skills: ["TypeScript", "Flutter", "Dart", "aws", "iOS", "Android", "Xcode"],
         description:
             "An iOS app to aid researchers in the collection of Parkinson symptoms data.",
         links: [
