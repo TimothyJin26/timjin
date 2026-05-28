@@ -202,3 +202,16 @@ Throughout the internship he collaborated directly with researchers and stakehol
 `,
     }
 ];
+
+export const fullTimeJobs: Internship[] = [
+    {
+        company: "Google",
+        role: "Software Engineer",
+        dates: "Incoming July 2026",
+        location: "San Francisco Bay Area",
+        skills: [],
+        summary: "Working on new and emerging consumer experiences at YouTube.",
+        details: `Working on new and emerging consumer experiences at YouTube. More to come…`,
+        links: [],
+    }
+];
