@@ -26,6 +26,46 @@ export default function Timeline() {
 
     const [selectedPoint, setSelectedPoint] = useState(timelinePoints[0]);
 
+    const companyColorMap: Record<string, string> = {
+        stanford: "#8d1514",
+        amazon: "#fc4b02",
+        rivian: "#ffb202",
+        ubc: "#01a9e1",
+    };
+
+    const googleColors = ["#4285F4", "#DB4437", "#F4B400", "#4285F4", "#0F9D58", "#DB4437"];
+
+    function renderCompanyLabel(label: string, selected = false) {
+        const lower = (label || "").toLowerCase();
+        const isGoogle = lower.includes("google");
+        const mappedKey = Object.keys(companyColorMap).find((k) => lower.includes(k));
+
+        let ci = 0;
+        return (
+            <span className="inline text-lg md:text-xl" aria-label={label}>
+                {label.split("").map((ch, i) => {
+                    if (ch === " ") return (
+                        <span key={i}>&nbsp;</span>
+                    );
+
+                    const style: React.CSSProperties | undefined = selected
+                        ? isGoogle
+                            ? { color: googleColors[ci++ % googleColors.length] }
+                            : mappedKey
+                                ? { color: companyColorMap[mappedKey] }
+                                : undefined
+                        : undefined;
+
+                    return (
+                        <span key={i} style={style}>
+                            {ch}
+                        </span>
+                    );
+                })}
+            </span>
+        );
+    }
+
     const detailContent = (extraClass = "") => (
         <div
             key={selectedPoint.id}
@@ -60,16 +100,16 @@ export default function Timeline() {
                     {timelinePoints.map((point) => {
                         const isSelected = selectedPoint.id === point.id;
                         return (
-                            <button
+                                <button
                                 key={point.id}
                                 onClick={() => setSelectedPoint(point)}
                                 className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium border transition-colors duration-200 ${
                                     isSelected
-                                        ? "bg-[#301000] text-white border-[#301000]"
+                                        ? "bg-transparent text-[#301000] border-[#301000]"
                                         : "text-[#301000] border-[#301000]/30 hover:border-[#301000]"
                                 }`}
                             >
-                                {point.label}
+                                {renderCompanyLabel(point.label, isSelected)}
                             </button>
                         );
                     })}
@@ -102,7 +142,7 @@ export default function Timeline() {
                                 : "text-black group-hover:text-[#301000]"
                         }`}
                                     >
-                                        {point.label}
+                                        {renderCompanyLabel(point.label, isSelected)}
                                     </div>
                                     <div
                                         className={`
