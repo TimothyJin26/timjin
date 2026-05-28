@@ -14,8 +14,8 @@ export default function About() {
                         </div>
                         <div className="text-base md:text-xl text-black leading-8 md:leading-8 font-sanchez">
                             <div className="pb-6 md:pb-8">
-                                I'm Tim, a fourth year Computer Science student
-                                at the University of British Columbia.
+                                I'm Tim, a software engineer and Computer Science graduate
+                                from the University of British Columbia.
                             </div>
                             <div className="pb-6 md:pb-8">
                                 I'm passionate about leveraging technology to drive transformative
