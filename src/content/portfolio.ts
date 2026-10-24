@@ -207,7 +207,7 @@ export const fullTimeJobs: Internship[] = [
     {
         company: "Google",
         role: "Software Engineer",
-        dates: "Incoming August 2026",
+        dates: "August 2026 - Present",
         location: "San Francisco Bay Area",
         skills: [],
         summary: "Working on new and emerging consumer experiences at YouTube.",
