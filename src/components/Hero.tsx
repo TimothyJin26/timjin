@@ -8,16 +8,16 @@ export default function Hero() {
             <div className="h-screen w-full flex flex-col justify-center items-center overflow-x-hidden">
                 <div className="w-full px-8 md:w-5/6 md:px-0 md:pl-28">
                     <div className="text-3xl md:text-5xl tracking-wide font-bold text-[#301000] pb-3">
-                        Student, software developer,
+                        Building, researching,
                         <br />
-                        ML Researcher
+                        Always exploring
                     </div>
                     <div className="text-[#526370]">
                         <TypeAnimation
                             sequence={[
                                 "Hi! I'm Tim 👋",
                                 1500,
-                                "Hi! I'm Tim 👋, a fourth year Computer Science student at UBC",
+                                "Hi! I'm Tim 👋, a software engineer at Google",
                                 1500,
                                 "Use the links below to reach out!",
                                 1000,

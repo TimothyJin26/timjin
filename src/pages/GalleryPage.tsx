@@ -12,7 +12,7 @@ export default function GalleryPage() {
                 <title>Timothy Jin | Gallery</title>
                 <meta
                     name="description"
-                    content="Student at the University of British Columbia"
+                    content="Software Engineer at Google"
                 />
             </Helmet>
             <Suspense fallback={<Preloader />}>

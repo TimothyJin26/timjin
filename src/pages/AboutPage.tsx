@@ -15,7 +15,7 @@ export default function AboutPage() {
                 <title>Timothy Jin | About</title>
                 <meta
                     name="description"
-                    content="Student at the University of British Columbia"
+                    content="Software Engineer at Google"
                 />
             </Helmet>
             <Suspense fallback={<Preloader />}>

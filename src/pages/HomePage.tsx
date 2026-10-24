@@ -16,7 +16,7 @@ export default function HomePage() {
                 <title>Timothy Jin</title>
                 <meta
                     name="description"
-                    content="Student at the University of British Columbia"
+                    content="Software Engineer at Google"
                 />
             </Helmet>
             <Suspense fallback={<Preloader />}>
